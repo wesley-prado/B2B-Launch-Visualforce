@@ -1,0 +1,50 @@
+<apex:page docType="html-5.0" standardStylesheets="false" showHeader="false" sidebar="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <title>
+                B2B Launch
+            </title>
+            <!-- Metas -->
+            <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+            <!-- Fontes e icons -->
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"/>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+            <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet"/>
+
+            <!-- CSS -->
+            <apex:stylesheet value="{!URLFOR($Resource.NExpress, 'libs/Sweetalert/SweetalertCss.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.LA_App, 'style.css')}"/>
+        </head>
+        <body ng-app="laApp">
+            <h1>Olá mundo!</h1>
+            <i class="material-icons">person</i>
+
+
+            <script>
+                window.resource = {
+                    HTML:{
+                        home: "{!URLFOR($Resource.LA_Home, 'home.html')}"
+                    },
+                    CSS:{
+                        home: "{!URLFOR($Resource.LA_Home, 'home.css')}"
+                    }
+                }
+            </script>
+            <apex:includeScript value="{!URLFOR($Resource.NExpress, 'libs/Sweetalert/SweetalertJs.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.NExpress, 'libs/AngularJs/Angular.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.NExpress, 'libs/AngularJs/AngularRoute.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.NExpress, 'libs/AngularJs/AngularLocationUpdate.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.NExpress, 'js/script.js')}"/>
+
+
+            <apex:includeScript value="{!URLFOR($Resource.LA_Main, 'main.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.LA_Home, 'home.js')}"/>
+
+            <!-- APP -->
+            <apex:includeScript value="{!URLFOR($Resource.LA_App, 'app.js')}"/>
+        </body>
+    </html>
+</apex:page>
