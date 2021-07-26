@@ -19,17 +19,25 @@
             <apex:stylesheet value="{!URLFOR($Resource.LA_App, 'style.css')}"/>
         </head>
         <body ng-app="laApp">
-            <h1>Olá mundo!</h1>
-            <i class="material-icons">person</i>
+            <div ng-controller="MainCtrl">
+                <div ng-view="true">
+                    
+                </div>
+            </div>
 
 
             <script>
                 window.resource = {
                     HTML:{
-                        home: "{!URLFOR($Resource.LA_Home, 'home.html')}"
+                        home: "{!URLFOR($Resource.LA_Home, 'home.html')}",
+                        404: "{!URLFOR($Resource.LA_404, '404.html')}"
                     },
                     CSS:{
-                        home: "{!URLFOR($Resource.LA_Home, 'home.css')}"
+                        home: "{!URLFOR($Resource.LA_Home, 'home.css')}",
+                        404: "{!URLFOR($Resource.LA_404, '404.css')}"
+                    },
+                    TEMPLATES:{
+                        404:"{!URLFOR($Resource.NExpress, 'imgs/404.svg')}"
                     }
                 }
             </script>
@@ -42,6 +50,7 @@
 
             <apex:includeScript value="{!URLFOR($Resource.LA_Main, 'main.js')}"/>
             <apex:includeScript value="{!URLFOR($Resource.LA_Home, 'home.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.LA_404, '404.js')}"/>
 
             <!-- APP -->
             <apex:includeScript value="{!URLFOR($Resource.LA_App, 'app.js')}"/>
