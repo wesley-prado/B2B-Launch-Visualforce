@@ -250,6 +250,14 @@ header .cart-container span span{
     display:flex;
     justify-content: center;
     align-items: center;
+
+    opacity:0;
+    pointer-events: none;
+    transition: .2s linear;
+}
+.modal-container.active{
+    opacity:1;
+    pointer-events: all;
 }
 .modal-container .modal-box{
     display:flex;
@@ -258,6 +266,11 @@ header .cart-container span span{
     width:900px;
     min-height: 600px;
     border-radius: 8px;
+    transform: scale(0);
+    transition: .2s linear;
+}
+.modal-container.active .modal-box{
+    transform: scale(1);
 }
 
 .modal-container .modal-box header{
