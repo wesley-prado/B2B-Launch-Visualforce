@@ -4,10 +4,13 @@
     --color-grey-light: #E5E5E5;
     --color-grey-medium: #999999;
     --color-grey-AAA: #AAAAAA;
+    --color-grey-DDD: #DDDDDD;
     --color-grey-666: #666666;
     --color-blue: #004899;
     --color-orange: #EA5B0A;
     --color-yellow: #FDC300;
+
+    --color-black-opacity-3: rgb(0, 0, 0,.3);
 
     --light: 300;
     --regular: 400;

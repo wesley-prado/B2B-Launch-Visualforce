@@ -67,10 +67,65 @@
                         </div>
                     </div>
                 </header>
-                <div ng-view="true">
-                    
+                <div ng-view="true"></div>
+                <section class="modal-container">
+                    <div class="modal-box">
+                        <header>
+                            <h1>Selecione uma conta</h1>
+                            <h2>Selecione uma das contas abaixo para realizar suas compras!</h2>
+                        </header>
+                        <div class="modal-content">
+                            <ul class="modal-list">
+                                <li>
+                                    <div class="modal-list-item">
+                                        <div>
+                                            <h3>Samuel Silva</h3>
+                                            <p>samule.silva@nescara.com</p>
+                                        </div>
+                                        <button>Selecionar</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="modal-list-item">
+                                        <div>
+                                            <h3>Samuel Silva</h3>
+                                            <p>samule.silva@nescara.com</p>
+                                        </div>
+                                        <button>Selecionar</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="modal-list-item">
+                                        <div>
+                                            <h3>Samuel Silva</h3>
+                                            <p>samule.silva@nescara.com</p>
+                                        </div>
+                                        <button>Selecionar</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="modal-list-item">
+                                        <div>
+                                            <h3>Samuel Silva</h3>
+                                            <p>samule.silva@nescara.com</p>
+                                        </div>
+                                        <button>Selecionar</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="modal-list-item">
+                                        <div>
+                                            <h3>Samuel Silva</h3>
+                                            <p>samule.silva@nescara.com</p>
+                                        </div>
+                                        <button>Selecionar</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>  
+                </section>
                 </div>
-            </div>
 
 
             <script>
