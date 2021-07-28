@@ -1,12 +1,242 @@
-html{
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
+html,body{
     font-size: 62.5%;
     font-family: 'Open sans';
+    height:100%;
+    width:100%;
+    background-color: var(--color-grey-light);
 }
-body{
-    font-size: 1.8rem;
+*{
+    margin:0;
+    padding:0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-size: 1.6rem;
 }
+
 h1{
-    
     font-size: 3.2rem;
-    font-weight: 600;
+}
+h2{
+    font-size:2.4rem;
+}
+h3{
+    font-size:2.08rem;
+}
+h4{
+    font-size:1.6rem;
+}
+h5{
+    font-size:1.28rem;
+}
+h6{
+    font-size:1.12rem;
+}
+
+.main-container{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width:100%;
+}
+
+header{
+    width:100%;
+    min-height:10rem;
+    background-color: var(--color-white);
+}
+.header-container{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    max-width: 130rem;
+    margin:0 auto;
+    padding:0 3rem;
+    min-height: 10rem;
+}
+header .header-logo img{
+    height: 5rem;
+    cursor:pointer;
+}
+header .header-search-container form{
+    height:5rem;
+    width:50rem;
+    border: 1px solid var(--color-grey-medium);
+    border-radius: 50px;
+    padding:0 3rem;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+header .header-search-container form div{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-flex:1;
+        -ms-flex:1;
+            flex:1;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height:100%;
+}
+header .header-search-container form label{
+    position:absolute;
+    z-index:1;
+    color: var(--color-grey-AAA);
+    font-size: 1.4rem;
+}
+.hide-label{
+    -webkit-filter:opacity(0);
+            filter:opacity(0);
+}
+
+header .header-search-container form input{
+    width:100%;
+    height:100%;
+    border:0;
+    outline:none;
+    background-color: transparent;
+    z-index:2;
+    font-size: 1.4rem;
+}
+header .header-search-container form button{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+    background-color: transparent;
+    border: none;
+    margin-left: 1.5rem;
+}
+header .header-search-container form button i{
+    font-size: 3.2rem;
+    color: var(--color-grey-AAA);
+}
+
+header .profile-container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    position:relative;
+}
+header .profile-container span{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    width:4rem;
+    height:4rem;
+    border-radius:50%;
+    background-color: var(--color-blue);
+}
+header .profile-container span i{
+    font-size: 3rem;
+    color: var(--color-white);
+}
+header .profile-container .profile-menu{
+    position: absolute;
+    width:100%;
+    top:100%;
+
+    opacity:0;
+    pointer-events: none;
+    z-index:3;
+}
+header .profile-container:hover .profile-menu,
+header .profile-container .profile-menu:hover{
+    opacity:1;
+    pointer-events: all;
+}
+header .profile-container .profile-menu ul{
+    list-style: none;
+    margin-top: 1.5rem;
+    background-color: var(--color-white);
+    border-radius:.8rem;
+    box-shadow: 0 0 .8rem rgba(0,0,0,0.25);
+    padding: 1.5rem;
+}
+header .profile-container .profile-menu ul li:not(:last-of-type){
+    margin-bottom: 1rem;
+}
+header .profile-container .profile-menu ul li a{
+    color: var(--color-grey-666);
+    font-size: 1.4rem;
+    cursor:pointer;
+}
+header .profile-container .profile-menu ul li a:hover{
+    color:var(--color-blue)
+}
+header .profile-content{
+    margin-left: 1rem;
+    display:flex;
+    flex-direction: column;
+}
+header .profile-content p {
+    font-size: 1.4rem;
+    color: var(--color-black);
+}
+header .profile-content a{
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    color: var(--color-orange);
+    cursor:pointer;
+}
+header .profile-content a i{
+    font-size:1.4rem;
+}
+header .cart-container span{
+    position: relative;
+    cursor:pointer
+}
+header .cart-container span i {
+    font-size: 3.2rem;
+    color: var(--color-blue)
+}
+header .cart-container span span{
+    position: absolute;
+    top: -1.8rem;
+    left: calc(100% - 1.3rem);
+
+    min-width: 1.6rem;
+    font-size: 1.2rem;
+    font-weight: var(--bold);
+    padding: 0 .2rem;
+    background-color: var(--color-yellow);
+    color: var(--color-blue);
+    border-radius:1.6rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noselect {
+    -webkit-touch-callout: none; 
+      -webkit-user-select: none; 
+         -moz-user-select: none; 
+          -ms-user-select: none; 
+              user-select: none;
 }

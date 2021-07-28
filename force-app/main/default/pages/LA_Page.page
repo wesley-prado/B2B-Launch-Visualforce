@@ -16,10 +16,57 @@
 
             <!-- CSS -->
             <apex:stylesheet value="{!URLFOR($Resource.NExpress, 'libs/Sweetalert/SweetalertCss.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.LA_App, 'variables.css')}"/>
             <apex:stylesheet value="{!URLFOR($Resource.LA_App, 'style.css')}"/>
         </head>
         <body ng-app="laApp">
-            <div ng-controller="MainCtrl">
+            <div ng-controller="MainCtrl" class="main-container">
+                <header>
+                    <div class="header-container">
+                       <div class="header-logo">
+                           <img src="https://www.centralbrf.com.br/resource/1620140924000/B2B_ECommerceApp/assets/brf-logo@2x.png" alt="logo"/>
+                        </div> 
+                        <div class="header-search-container">
+                                <form>
+                                    <input id="header-search"/>
+                                    <label for="header-search" id="header-search-label" class="noselect">Procure os melhores produtos.</label>
+                                    <button type="submit">
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                </form>                     
+                        </div>
+                        <div class="profile-container noselect">
+                            <span>
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="profile-content">
+                                <p>Conta ABC,</p>
+                                <a>acesse sua conta <i class="material-icons">keyboard_arrow_down</i></a>
+                            </div>
+
+                            <div class="profile-menu noselect">
+                                <ul>
+                                    <li>
+                                        <a>Início</a>
+                                    </li>
+                                    <li>
+                                        <a>Meus pedidos</a>
+                                    </li>
+                                    <li>
+                                        <a>Trocar conta</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="cart-container noselect">
+                            <span>
+                                <i class="material-icons">shopping_cart</i>
+                                <span>4</span>
+                            </span>
+                        </div>
+                    </div>
+                </header>
                 <div ng-view="true">
                     
                 </div>
@@ -40,6 +87,19 @@
                         404:"{!URLFOR($Resource.NExpress, 'imgs/404.svg')}"
                     }
                 }
+            </script>
+            <script>
+                const $input = document.querySelector('#header-search')
+                const $label = document.querySelector('#header-search-label')
+                
+                $input.addEventListener('input',()=> {
+                    if($input.value == ''){
+                        $label.classList.remove('hide-label')
+                    }
+                    else{
+                        $label.classList.add('hide-label')
+                    }
+                })
             </script>
             <apex:includeScript value="{!URLFOR($Resource.NExpress, 'libs/Sweetalert/SweetalertJs.js')}"/>
             <apex:includeScript value="{!URLFOR($Resource.NExpress, 'libs/AngularJs/Angular.js')}"/>
