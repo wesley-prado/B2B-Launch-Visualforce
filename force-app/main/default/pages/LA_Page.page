@@ -5,7 +5,7 @@
                 B2B Launch
             </title>
             <!-- Metas -->
-            <meta name="viewport" content="width=device-width, user-scalable=no"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no"/>
 
             <!-- Fontes e icons -->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -67,7 +67,9 @@
                         </div>
                     </div>
                 </header>
+
                 <div ng-view="true"></div>
+                
                 <section class="modal-container">
                     <div class="modal-box">
                         <header>
@@ -125,6 +127,40 @@
                         </div>
                     </div>  
                 </section>
+                <footer class="footer-cart">
+                    <div class="footer-cart-item">
+                        <span class="cart-icon">
+                            <i class="material-icons">shopping_cart</i>
+                            <span>4</span>
+                        </span>
+                    </div>
+                    <div class="footer-cart-item footer-cart-item-text">
+                        <p>Ver carrinho</p>
+                    </div>
+                    <div class="footer-cart-item footer-cart-item-price">
+                        <p>R$ 250,00</p>
+                    </div>
+                </footer>
+                <footer class="footer-menu">
+                    <a class="footer-menu-item">
+                        <span>
+                            <i class="material-icons">home</i>
+                        </span>
+                        <p>Início</p>
+                    </a>
+                    <a class="footer-menu-item">
+                        <span>
+                            <i class="material-icons">person</i>
+                        </span>
+                        <p>Contas</p>
+                    </a>
+                    <a class="footer-menu-item">
+                        <span>
+                            <i class="material-icons">local_shipping</i>
+                        </span>
+                        <p>Pedidos</p>
+                    </a>
+                </footer>
                 </div>
 
 
