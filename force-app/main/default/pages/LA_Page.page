@@ -19,7 +19,7 @@
             <apex:stylesheet value="{!URLFOR($Resource.LA_App, 'variables.css')}"/>
             <apex:stylesheet value="{!URLFOR($Resource.LA_App, 'style.css')}"/>
         </head>
-        <body ng-app="laApp">
+        <body ng-app="laApp" class="ng-cloak">
             <div ng-controller="MainCtrl" class="main-container">
                 <header>
                     <div class="header-container">
@@ -28,7 +28,7 @@
                         </div> 
                         <div class="header-search-container">
                                 <form>
-                                    <input id="header-search"/>
+                                    <input id="header-search" ng-model="data.search"/>
                                     <label for="header-search" id="header-search-label" class="noselect">Procure os melhores produtos.</label>
                                     <button type="submit">
                                         <i class="material-icons">search</i>
@@ -53,7 +53,7 @@
                                         <a>Meus pedidos</a>
                                     </li>
                                     <li>
-                                        <a>Trocar conta</a>
+                                        <a ng-click="setShowModal()">Trocar conta</a>
                                     </li>
                                 </ul>
                             </div>
@@ -62,7 +62,7 @@
                         <div class="cart-container noselect">
                             <span>
                                 <i class="material-icons">shopping_cart</i>
-                                <span>4</span>
+                                <span ng-show="data.cart.productList.length > 0">{{getCartQuantity()}}</span>
                             </span>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
 
                 <div ng-view="true"></div>
                 
-                <section class="modal-container">
+                <section class="modal-container {{config.show.modal ? 'active' : ''}}">
                     <div class="modal-box">
                         <header>
                             <h1>Selecione uma conta</h1>
@@ -84,7 +84,7 @@
                                             <h3>Samuel Silva</h3>
                                             <p>samule.silva@nescara.com</p>
                                         </div>
-                                        <button>Selecionar</button>
+                                        <button ng-click="setHideModal()">Selecionar</button>
                                     </div>
                                 </li>
                                 <li>
@@ -93,7 +93,7 @@
                                             <h3>Samuel Silva</h3>
                                             <p>samule.silva@nescara.com</p>
                                         </div>
-                                        <button>Selecionar</button>
+                                        <button ng-click="setHideModal()">Selecionar</button>
                                     </div>
                                 </li>
                                 <li>
@@ -102,7 +102,7 @@
                                             <h3>Samuel Silva</h3>
                                             <p>samule.silva@nescara.com</p>
                                         </div>
-                                        <button>Selecionar</button>
+                                        <button ng-click="setHideModal()">Selecionar</button>
                                     </div>
                                 </li>
                                 <li>
@@ -111,7 +111,7 @@
                                             <h3>Samuel Silva</h3>
                                             <p>samule.silva@nescara.com</p>
                                         </div>
-                                        <button>Selecionar</button>
+                                        <button ng-click="setHideModal()">Selecionar</button>
                                     </div>
                                 </li>
                                 <li>
@@ -120,41 +120,41 @@
                                             <h3>Samuel Silva</h3>
                                             <p>samule.silva@nescara.com</p>
                                         </div>
-                                        <button>Selecionar</button>
+                                        <button ng-click="setHideModal()">Selecionar</button>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>  
                 </section>
-                <footer class="footer-cart">
+                <footer class="footer-cart" ng-if="getCartQuantity() > 0">
                     <div class="footer-cart-item">
                         <span class="cart-icon">
                             <i class="material-icons">shopping_cart</i>
-                            <span>4</span>
+                            <span>{{getCartQuantity()}}</span>
                         </span>
                     </div>
                     <div class="footer-cart-item footer-cart-item-text">
                         <p>Ver carrinho</p>
                     </div>
                     <div class="footer-cart-item footer-cart-item-price">
-                        <p>R$ 250,00</p>
+                        <p>{{formatPrice(getCartPrice())}}</p>
                     </div>
                 </footer>
                 <footer class="footer-menu">
-                    <a class="footer-menu-item">
+                    <a class="footer-menu-item {{getMenuActivated('home') ? 'active' : ''}}" ng-click="setHideModal()">
                         <span>
                             <i class="material-icons">home</i>
                         </span>
                         <p>Início</p>
                     </a>
-                    <a class="footer-menu-item">
+                    <a class="footer-menu-item {{getMenuActivated('contas') ? 'active' : ''}}" ng-click="setShowModal()">
                         <span>
                             <i class="material-icons">person</i>
                         </span>
                         <p>Contas</p>
                     </a>
-                    <a class="footer-menu-item">
+                    <a class="footer-menu-item {{getMenuActivated('pedidos') ? 'active' : ''}}">
                         <span>
                             <i class="material-icons">local_shipping</i>
                         </span>
