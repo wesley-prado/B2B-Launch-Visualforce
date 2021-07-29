@@ -20,7 +20,7 @@
             <apex:stylesheet value="{!URLFOR($Resource.LA_App, 'style.css')}"/>
         </head>
         <body ng-app="laApp" class="ng-cloak">
-            <div ng-controller="MainCtrl" class="main-container">
+            <div ng-controller="MainCtrl" class="main-container" ng-init="init()">
                 <header>
                     <div class="header-container">
                        <div class="header-logo">
@@ -40,7 +40,7 @@
                                 <i class="material-icons">person</i>
                             </span>
                             <div class="profile-content">
-                                <p>Conta ABC,</p>
+                                <p>{{data.account.name || 'Selecione uma conta'}},</p>
                                 <a>acesse sua conta <i class="material-icons">keyboard_arrow_down</i></a>
                             </div>
 
@@ -78,49 +78,13 @@
                         </header>
                         <div class="modal-content">
                             <ul class="modal-list">
-                                <li>
+                                <li ng-repeat="account in data.accountList">
                                     <div class="modal-list-item">
                                         <div>
-                                            <h3>Samuel Silva</h3>
-                                            <p>samule.silva@nescara.com</p>
+                                            <h3>{{account.name}}</h3>
+                                            <p>{{account.email}}</p>
                                         </div>
-                                        <button ng-click="setHideModal()">Selecionar</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="modal-list-item">
-                                        <div>
-                                            <h3>Samuel Silva</h3>
-                                            <p>samule.silva@nescara.com</p>
-                                        </div>
-                                        <button ng-click="setHideModal()">Selecionar</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="modal-list-item">
-                                        <div>
-                                            <h3>Samuel Silva</h3>
-                                            <p>samule.silva@nescara.com</p>
-                                        </div>
-                                        <button ng-click="setHideModal()">Selecionar</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="modal-list-item">
-                                        <div>
-                                            <h3>Samuel Silva</h3>
-                                            <p>samule.silva@nescara.com</p>
-                                        </div>
-                                        <button ng-click="setHideModal()">Selecionar</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="modal-list-item">
-                                        <div>
-                                            <h3>Samuel Silva</h3>
-                                            <p>samule.silva@nescara.com</p>
-                                        </div>
-                                        <button ng-click="setHideModal()">Selecionar</button>
+                                        <button ng-click="setSelectedAccount(account)">Selecionar</button>
                                     </div>
                                 </li>
                             </ul>

@@ -29,7 +29,35 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
                 price:64.50
             },
         ]
-        }
+        },
+        account: null,
+        accountList:[
+            {   
+                id: 1,
+                name: 'Samuel Silva',
+                email: 'samuel.silva@nescara.com'
+            },
+            {   
+                id: 2,
+                name: 'Christiane Smokovicz',
+                email: 'christiane.smokovicz@nescara.com'
+            },
+            {   
+                id: 3,
+                name: 'Marcio Rizzatto',
+                email: 'marcio.rizzatto@nescara.com'
+            },
+            {   
+                id: 4,
+                name: 'Lilian March',
+                email: 'lilian.march@nescara.com'
+            },
+            {   
+                id: 5,
+                name: 'Rodrigo Morais',
+                email: 'rodrigo.morais@nescara.com'
+            }
+        ]
     }
 
     scope.getCartQuantity = () =>{
@@ -62,8 +90,18 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
         scope.config.show.modal = false
     }
 
+    scope.setSelectedAccount = function(account){
+        if(!account) account = scope.data.accountList[0]
+        scope.data.account = account
+        scope.setHideModal()
+    }
+
     scope.getMenuActivated = function(item){
         let itemActivated = scope.config.show.modal ? 'contas' : 'home'
         return item === itemActivated
+    }
+
+    scope.init = function(){
+       scope.setSelectedAccount()
     }
 }]
