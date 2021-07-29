@@ -31,33 +31,7 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
         ]
         },
         account: null,
-        accountList:[
-            {   
-                id: 1,
-                name: 'Samuel Silva',
-                email: 'samuel.silva@nescara.com'
-            },
-            {   
-                id: 2,
-                name: 'Christiane Smokovicz',
-                email: 'christiane.smokovicz@nescara.com'
-            },
-            {   
-                id: 3,
-                name: 'Marcio Rizzatto',
-                email: 'marcio.rizzatto@nescara.com'
-            },
-            {   
-                id: 4,
-                name: 'Lilian March',
-                email: 'lilian.march@nescara.com'
-            },
-            {   
-                id: 5,
-                name: 'Rodrigo Morais',
-                email: 'rodrigo.morais@nescara.com'
-            }
-        ]
+        accountList:[]
     }
 
     scope.getCartQuantity = () =>{
@@ -102,6 +76,7 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
     }
 
     scope.init = function(){
-       scope.setSelectedAccount()
+        scope.data.accountList = accountList;
+        scope.setSelectedAccount()
     }
 }]

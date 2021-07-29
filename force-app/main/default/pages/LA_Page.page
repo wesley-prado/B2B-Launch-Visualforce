@@ -1,4 +1,4 @@
-<apex:page docType="html-5.0" standardStylesheets="false" showHeader="false" sidebar="false" applyBodyTag="false" applyHtmlTag="false">
+<apex:page docType="html-5.0" standardStylesheets="false" showHeader="false" sidebar="false" applyBodyTag="false" applyHtmlTag="false" controller="LA_Controller">
     <html>
         <head>
             <title>
@@ -82,7 +82,7 @@
                                     <div class="modal-list-item">
                                         <div>
                                             <h3>{{account.name}}</h3>
-                                            <p>{{account.email}}</p>
+                                            <p>{{account.phone || 'Telefone não encontrado.'}}</p>
                                         </div>
                                         <button ng-click="setSelectedAccount(account)">Selecionar</button>
                                     </div>
@@ -142,6 +142,8 @@
                         404:"{!URLFOR($Resource.NExpress, 'imgs/404.svg')}"
                     }
                 }
+
+                const accountList = JSON.parse('{!accountList}');
             </script>
             <script>
                 const $input = document.querySelector('#header-search')
