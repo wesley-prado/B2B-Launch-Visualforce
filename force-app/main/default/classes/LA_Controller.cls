@@ -15,4 +15,8 @@ public without sharing class LA_Controller {
     public static LA_AccountController.AccountDTO getAccountList(){
         return LA_AccountController.getAccountList();
     }
+    @RemoteAction
+    public static LA_ProductController.ProductDTO getProductList(){
+        return LA_ProductController.getProductList();
+    }
 }
