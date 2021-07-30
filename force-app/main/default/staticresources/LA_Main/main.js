@@ -1,10 +1,13 @@
-const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location', '$timeout', '$routeParams', function(scope, http, $sce, $route, $location, $timeout, $routeParams){
+const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location', '$timeout', '$routeParams', (scope, http, $sce, $route, $location, $timeout, $routeParams)=>{
     scope.TEMPLATES = window.resource.TEMPLATES
     scope.CSS = window.resource.CSS
     
     scope.config = {
         show:{
             modal: false
+        },
+        loading:{
+            productList: false
         }
     }
 
@@ -13,26 +16,11 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
     scope.data = {
         search: null,
         cart: {
-            productList:[
-            {
-                name:'P1',
-                qtd: 2,
-                price:64.50
-            },
-            {
-                name:'P2',
-                qtd: 1,
-                price:64.50
-            },
-            {
-                name:'P3',
-                qtd: 2,
-                price:64.50
-            },
-        ]
+            productList:[]
         },
         account: null,
-        accountList:[]
+        accountList:[],
+        productList:[]
     }
 
     scope.getCartQuantity = () =>{
@@ -65,18 +53,43 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
         scope.config.show.modal = false
     }
 
-    scope.setSelectedAccount = function(account){
+    scope.setSelectedAccount = (account)=>{
         if(!account) account = scope.data.accountList[0]
         scope.data.account = account
         scope.setHideModal()
     }
 
-    scope.getMenuActivated = function(item){
+    scope.getMenuActivated = (item)=>{
         let itemActivated = scope.config.show.modal ? 'contas' : 'home'
         return item === itemActivated
     }
 
-    scope.init = function(){
+    scope.addProductQuantity = (product, qtd = 1)=>{
+        if(product.qtd < 1) {
+            product.qtd = 1
+        }
+        product.qtd += qtd
+    }
+    scope.removeProductQuantity = (product, qtd = 1)=>{
+        if(product.qtd - qtd < 1) {
+            product.qtd = 1
+            return
+        }
+        product.qtd -= qtd
+    }
+
+    scope.addProductToCart = (product)=>{
+        let productInCart = scope.data.cart.productList.find(p => p.id == product.id)
+        if(productInCart){
+            productInCart.qtd += product.qtd
+        }else{
+            scope.data.cart.productList.push({...product})
+        }
+        product.qtd = 1
+        console.log(scope.data.cart.productList)
+    }
+
+    scope.init = ()=>{
         scope.data.accountList = accountList;
         scope.setSelectedAccount()
     }
