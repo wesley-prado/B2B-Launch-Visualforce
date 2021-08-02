@@ -10,10 +10,12 @@
     --color-blue: #004899;
     --color-orange-light: #FAF4EC;
     --color-orange: #EA5B0A;
+    --color-red: #ED0000;
     --color-yellow: #FDC300;
     --color-green: #369832;
 
-    --color-black-opacity-3: rgb(0, 0, 0,.3);
+    --color-black-opacity-3: rgba(0, 0, 0,.3);
+    --color-red-opacity-3: rgba(237, 0, 0,.3);
 
     --light: 300;
     --regular: 400;
