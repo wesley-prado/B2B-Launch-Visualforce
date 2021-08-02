@@ -67,6 +67,10 @@ const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location
         scope.$apply()
     }
 
+    scope.deleteFromCart(){
+        
+    }
+
     scope.init = ()=>{
         // scope.handle_getProductList();
     }

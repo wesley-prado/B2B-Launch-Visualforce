@@ -414,6 +414,13 @@ header .cart-container a span,
     font-weight: var(--bold);
     color: var(--color-white);
 }
+.product-quantity-container button.product-quantity-delete {
+    background-color: var(--color-red-opacity-3);
+}
+.product-quantity-container button.product-quantity-delete i{
+    color:var(--color-red);
+    font-size: 20px;
+}
 .product-quantity-container button.product-quantity-add > *{
     cursor: pointer;
 }

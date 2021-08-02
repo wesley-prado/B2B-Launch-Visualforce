@@ -36,13 +36,22 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
 
     scope.getCartPrice = () =>{
         let result = 0;
-        if(scope.data.cart.productList.length == 0) return 0
-
-        result = scope.data.cart.productList.reduce((a={price:0, qtd: 0}, b={price:0, qtd: 0})=>{
-            return {price: (a.price * a.qtd) + (b.price * b.qtd), qtd: 1}
-        }).price
-
-        return result
+        if(scope.data.cart.productList.length == 0){
+            return 0
+        }
+        
+        else if(scope.data.cart.productList.length == 1){
+            result = scope.data.cart.productList[0].qtd * scope.data.cart.productList[0].price
+            
+            return result
+        }
+        else{
+            result = scope.data.cart.productList.reduce((a={price:0, qtd}, b={price:0, qtd})=>{
+                return {price: (a.price * a.qtd) + (b.price * b.qtd), qtd: 1}
+            }).price
+    
+            return result
+        }
     }
 
 
@@ -65,16 +74,10 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
     }
 
     scope.addProductQuantity = (product, qtd = 1)=>{
-        if(product.qtd < 1) {
-            product.qtd = 1
-        }
         product.qtd += qtd
     }
     scope.removeProductQuantity = (product, qtd = 1)=>{
-        if(product.qtd - qtd < 1) {
-            product.qtd = 1
-            return
-        }
+        if(product.qtd - qtd < 1) qtd = 0
         product.qtd -= qtd
     }
 

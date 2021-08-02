@@ -26,11 +26,14 @@
                         <td class="cart-content-quantity-price">
                             <h3>{{formatPrice(product.price * product.qtd)}}</h3>
                             <div class="product-quantity-container">
-                                <button ng-disabled="product.qtd < 1">
+                                <button ng-click="removeProductQuantity(product)" ng-if="product.qtd > 1">
                                     <i class="material-icons">remove</i>
                                 </button>
+                                <button ng-if="product.qtd <= 1" class="product-quantity-delete">
+                                    <i class="material-icons">delete</i>
+                                </button>
                                 <input type="number" ng-model="product.qtd" readonly/>
-                                <button>
+                                <button ng-click="addProductQuantity(product)">
                                     <i class="material-icons">add</i>
                                 </button>
                             </div>
