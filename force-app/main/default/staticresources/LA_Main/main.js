@@ -36,7 +36,7 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
 
     scope.getCartPrice = () =>{
         let result = 0;
-        if(scope.data.cart.productList.length <= 0) return 0
+        if(scope.data.cart.productList.length == 0) return 0
 
         result = scope.data.cart.productList.reduce((a={price:0, qtd: 0}, b={price:0, qtd: 0})=>{
             return {price: (a.price * a.qtd) + (b.price * b.qtd), qtd: 1}
@@ -86,7 +86,6 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
             scope.data.cart.productList.push({...product})
         }
         product.qtd = 1
-        console.log(scope.data.cart.productList)
     }
 
     scope.init = ()=>{

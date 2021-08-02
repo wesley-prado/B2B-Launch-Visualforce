@@ -38,6 +38,9 @@ h5{
 h6{
     font-size:1.12rem;
 }
+a{
+    text-decoration: none;
+}
 
 /* Remove setas dos inputs do tipo number */
 /* Chrome, Safari, Edge, Opera */
@@ -83,7 +86,7 @@ header{
     padding:0 3rem;
     min-height: 10rem;
 }
-header .header-logo img{
+header .header-logo a img{
     height: 5rem;
     cursor:pointer;
 }
@@ -221,19 +224,19 @@ header .profile-content a{
 header .profile-content a i{
     font-size:1.4rem;
 }
-header .cart-container span,
+header .cart-container a,
 .footer-cart span.cart-icon{
     position: relative;
     cursor:pointer
 }
-header .cart-container span i {
+header .cart-container a i {
     font-size: 3.2rem;
     color: var(--color-blue)
 }
-header .cart-container span span,
+header .cart-container a span,
 .footer-cart span.cart-icon span{
     position: absolute;
-    top: -1.8rem;
+    top: -2rem;
     left: calc(100% - 1.3rem);
 
     min-width: 1.6rem;
@@ -279,7 +282,7 @@ header .cart-container span span,
     flex-direction: column;
     background-color: var(--color-white);
     width:900px;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     overflow: auto;
     transform: scale(0);
     transition: .2s linear;
@@ -310,7 +313,7 @@ header .cart-container span span,
 }
 .modal-container .modal-list-item{
     border:1px solid var(--color-grey-DDD);
-    border-radius:8px;
+    border-radius: var(--border-radius);
     padding:15px;
     margin-bottom: 5px;
 
@@ -332,7 +335,7 @@ header .cart-container span span,
     min-height: 40px;
     min-width:120px;
     border:0;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     font-size: 14px;
     font-weight: var(--bold);
 
@@ -368,9 +371,71 @@ header .cart-container span span,
     font-weight: var(--regular);
 }
 
+/* PRODUCT QUANTITY */
+.product-quantity-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.product-quantity-container button{
+    height: 30px;
+    width: 30px;
+    border-radius: var(--border-radius);
+    background-color: var(--color-orange-light);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:none;
+    cursor: pointer;
+}
+.product-quantity-container button:disabled{
+    background-color: var(--color-grey-DDD);
+    pointer-events: none;
+    cursor: not-allowed;
+    cursor: -moz-not-allowed;
+    cursor: -webkit-not-allowed;
+}
+.product-quantity-container button:disabled i{
+    color: var(--color-grey-666)
+}
+.product-quantity-container button i{
+    color: var(--color-orange);
+    font-size: 14px;
+
+}
+.product-quantity-container button.product-quantity-add {
+    width: 115px;
+    background-color: var(--color-green);
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: var(--bold);
+    color: var(--color-white);
+}
+.product-quantity-container button.product-quantity-add > *{
+    cursor: pointer;
+}
+.product-quantity-container button.product-quantity-add i{
+    color: var(--color-white);
+}
+.product-quantity-container input{
+    width:30px;
+    height:30px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-grey-AAA);
+    text-align: center;
+    outline: none;
+    margin:0 5px;
+    font-size: 14px;
+    font-weight: var(--bold);
+}
+
+
 @media (max-width: 1025px){
     /* HEADER */
-    header .header-logo img{
+    header .header-logo a img{
         height: auto;
         width:16rem;
     }
@@ -383,7 +448,7 @@ header .cart-container span span,
     .header-container{
         padding: 0 1.5rem;
     }
-    header .header-logo img{
+    header .header-logo a img{
         width:14rem;
     }
     header .header-search-container form{
@@ -419,6 +484,9 @@ header .cart-container span span,
     .modal-container .modal-box{
         height:90vh;
     }
+    .product-quantity-container button.product-quantity-add i{
+        display: none;
+    }
 }
 
 @media (max-width: 426px){
@@ -431,7 +499,7 @@ header .cart-container span span,
  header .cart-container{
      display:none;
  }
- header .header-logo img{
+ header .header-logo a img{
     height:3rem;
     width:auto;
 }
@@ -571,6 +639,13 @@ header .header-search-container form{
 .page-container > header h2{
     font-size: 14px;
     text-align: center;
+}
+/* PRODUCT QUANTITY */
+.product-quantity-container button.product-quantity-add label{
+    display:none;
+}
+.product-quantity-container button.product-quantity-add{
+    width:30px;
 }
 }
 

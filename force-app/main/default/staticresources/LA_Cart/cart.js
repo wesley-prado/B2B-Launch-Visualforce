@@ -1,4 +1,4 @@
-const HomeController = ['$scope', '$http','$sce', '$route', '$route', '$location', '$timeout', '$routeParams', function(scope, http, $sce, $route, $location, $timeout, $routeParams){
+const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location', '$timeout', '$routeParams', function(scope, http, $sce, $route, $location, $timeout, $routeParams){
     scope.getProductList = async ()=>{
         try {
             return await new Promise((resolve)=>{
@@ -68,6 +68,6 @@ const HomeController = ['$scope', '$http','$sce', '$route', '$route', '$location
     }
 
     scope.init = ()=>{
-        scope.handle_getProductList();
+        // scope.handle_getProductList();
     }
 }]

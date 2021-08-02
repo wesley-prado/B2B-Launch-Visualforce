@@ -24,7 +24,9 @@
                 <header>
                     <div class="header-container">
                        <div class="header-logo">
-                           <img src="https://www.centralbrf.com.br/resource/1620140924000/B2B_ECommerceApp/assets/brf-logo@2x.png" alt="logo"/>
+                        <a href="#/">
+                            <img src="https://www.centralbrf.com.br/resource/1620140924000/B2B_ECommerceApp/assets/brf-logo@2x.png" alt="logo"/>
+                        </a>
                         </div> 
                         <div class="header-search-container">
                                 <form>
@@ -47,7 +49,7 @@
                             <div class="profile-menu noselect">
                                 <ul>
                                     <li>
-                                        <a>Início</a>
+                                        <a href="#/">Início</a>
                                     </li>
                                     <li>
                                         <a>Meus pedidos</a>
@@ -60,10 +62,10 @@
                         </div>
 
                         <div class="cart-container noselect">
-                            <span>
+                            <a href="#/carrinho">
                                 <i class="material-icons">shopping_cart</i>
                                 <span ng-show="data.cart.productList.length > 0">{{getCartQuantity()}}</span>
-                            </span>
+                            </a>
                         </div>
                     </div>
                 </header>
@@ -91,12 +93,12 @@
                         </div>
                     </div>  
                 </section>
-                <footer class="footer-cart" ng-if="getCartQuantity() > 0">
+                <a href="#/carrinho" class="footer-cart" ng-if="getCartQuantity() > 0">
                     <div class="footer-cart-item">
                         <span class="cart-icon">
                             <i class="material-icons">shopping_cart</i>
                             <span>{{getCartQuantity()}}</span>
-                        </span>
+                        </span> 
                     </div>
                     <div class="footer-cart-item footer-cart-item-text">
                         <p>Ver carrinho</p>
@@ -104,9 +106,9 @@
                     <div class="footer-cart-item footer-cart-item-price">
                         <p>{{formatPrice(getCartPrice())}}</p>
                     </div>
-                </footer>
+                </a>
                 <footer class="footer-menu">
-                    <a class="footer-menu-item {{getMenuActivated('home') ? 'active' : ''}}" ng-click="setHideModal()">
+                    <a href="#/" class="footer-menu-item {{getMenuActivated('home') ? 'active' : ''}}" ng-click="setHideModal()">
                         <span>
                             <i class="material-icons">home</i>
                         </span>
@@ -132,10 +134,12 @@
                 window.resource = {
                     HTML:{
                         home: "{!URLFOR($Resource.LA_Home, 'home.html')}",
+                        cart: "{!URLFOR($Resource.LA_Cart, 'cart.html')}",
                         404: "{!URLFOR($Resource.LA_404, '404.html')}"
                     },
                     CSS:{
                         home: "{!URLFOR($Resource.LA_Home, 'home.css')}",
+                        cart: "{!URLFOR($Resource.LA_Cart, 'cart.css')}",
                         404: "{!URLFOR($Resource.LA_404, '404.css')}"
                     },
                     TEMPLATES:{
@@ -167,6 +171,7 @@
 
             <apex:includeScript value="{!URLFOR($Resource.LA_Main, 'main.js')}"/>
             <apex:includeScript value="{!URLFOR($Resource.LA_Home, 'home.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.LA_Cart, 'cart.js')}"/>
             <apex:includeScript value="{!URLFOR($Resource.LA_404, '404.js')}"/>
 
             <!-- APP -->

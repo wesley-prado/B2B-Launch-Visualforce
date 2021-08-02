@@ -1,0 +1,68 @@
+<link href="{{CSS.cart}}" rel="stylesheet"/>
+
+<div class="page-container" ng-init="init()">
+    <header>
+        <h1>Carrinho</h1>
+        <h2>Comprando para: <strong>{{data.account.name}}</strong></h2>
+    </header>
+
+    <section class="page-cart-container" ng-show="data.cart.productList.length > 0">
+        <div class="cart-content">
+            <table>
+                <tbody>
+                    <tr ng-repeat="product in data.cart.productList">
+                        <td>
+                            <a href="#/produto/{{product.id}}">
+                                <img src="{{product.image}}"/>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/produto/{{product.id}}">
+                                <p>{{product.name}}</p>
+                                <h4>{{formatPrice(product.price)}}</h4>
+                            </a>
+
+                        </td>
+                        <td class="cart-content-quantity-price">
+                            <h3>{{formatPrice(product.price * product.qtd)}}</h3>
+                            <div class="product-quantity-container">
+                                <button ng-disabled="product.qtd < 1">
+                                    <i class="material-icons">remove</i>
+                                </button>
+                                <input type="number" ng-model="product.qtd" readonly/>
+                                <button>
+                                    <i class="material-icons">add</i>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="cart-content-price">
+                            <h3>{{formatPrice(product.price * product.qtd)}}</h3>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <aside class="cart-summary">
+            <h1>Total da compra</h1>
+            <div>
+                <h2>{{formatPrice(getCartPrice())}}</h2>
+                <h3><strong>{{getCartQuantity()}}</strong> produtos</h3>
+            </div>
+            <button>Comprar</button>
+        </aside>
+    </section>
+    <a href="#/carrinho" class="footer-cart cart-confirm-button" ng-if="getCartQuantity() > 0">
+        <div class="footer-cart-item">
+            <span class="cart-icon">
+                <i class="material-icons">shopping_cart</i>
+                <span>{{getCartQuantity()}}</span>
+            </span> 
+        </div>
+        <div class="footer-cart-item footer-cart-item-text">
+            <p>Comprar</p>
+        </div>
+        <div class="footer-cart-item footer-cart-item-price">
+            <p>{{formatPrice(getCartPrice())}}</p>
+        </div>
+    </a>
+</div>
