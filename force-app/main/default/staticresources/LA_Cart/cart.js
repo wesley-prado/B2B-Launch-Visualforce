@@ -1,9 +1,9 @@
 const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location', '$timeout', '$routeParams', function(scope, http, $sce, $route, $location, $timeout, $routeParams){
-    scope.getProductList = async ()=>{
+    scope.setOrder = async ()=>{
         try {
             return await new Promise((resolve)=>{
                 try {
-                    callRemoteAction('LA_Controller.getProductList', null, (result, event)=>{
+                    callRemoteAction('LA_Controller.setOrder', null, (result, event)=>{
                         resolve({
                             result,
                             event
@@ -30,15 +30,19 @@ const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location
         }
     }
 
-    scope.handle_getProductList = async ()=>{
-        scope.config.loading.productList = true;
+    scope.handle_setOrder = async ()=>{
+        scope.config.loading.setOrder = true;
         try {
-            let {result, event} = await scope.getProductList()
+            let {result, event} = await scope.setOrder()
             
 
             if(event && result){
                 if(!result.hasError){
-                    scope.data.productList = result.data
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Pedido realizado com sucesso!',
+                        html: result.message
+                    })
                 }else{
                     console.error('error', error),
                     Swal.fire({
@@ -63,19 +67,30 @@ const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location
                 html: '[3] Ocorreu um erro, tente novamente mais tarde...'
             })
         }
-        scope.config.loading.productList = false;
+        scope.config.loading.setOrder = false;
         scope.$apply()
     }
 
-<<<<<<< HEAD
-    scope.deleteFromCart = ()=>{
-
+    scope.deleteFromCart = (product, confirm = false)=>{
+        if(!confirm){
+            Swal.fire({
+                type: 'question',
+                title: 'Tem certeza?',
+                html: "Deseja remover <strong>"+product.name+"</strong> do carrinho?",
+                confirmButtonText: 'Sim, desejo remover.',
+                showCancelButton: true,
+                cancelButtonText: 'Não, manter produto.'
+            }).then((response)=>{
+                if(response.value){
+                    scope.deleteFromCart(product, true)
+                }
+            })
+            return false;
+        }
+        let index = scope.data.cart.productList.findIndex(p => p.id == product.id);
+        scope.data.cart.productList.splice(index, 1);
+        scope.$apply()
     };
-=======
-    scope.deleteFromCart(){
-        
-    }
->>>>>>> bbf7a3742b365b7eb0df8a01fcb3c0dfb4073aed
 
     scope.init = ()=>{
         // scope.handle_getProductList();

@@ -7,7 +7,8 @@ const MainController = ['$scope', '$http','$sce', '$route', '$route', '$location
             modal: false
         },
         loading:{
-            productList: false
+            productList: false,
+            setOrder: false,
         }
     }
 
