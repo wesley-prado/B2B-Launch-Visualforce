@@ -2,13 +2,14 @@
 
 <div class="page-container" ng-init="init()">
     <header>
-        <h1>Conheça nosso catálogo</h1>
-        <h2 ng-if="!config.loading.productList">Exibindo {{data.productList.length}} produtos</h2>
+        <h1 ng-if="!data.search">Conheça nosso catálogo</h1>
+        <h1 ng-if="data.search">Você buscou por: {{data.search}} <span class="clean-search" ng-click="data.search = null"><i class="material-icons">close</i></span></h1>
+        <h2 ng-if="!config.loading.productList">Exibindo {{(data.productList | filter:data.search).length}} produtos</h2>
         <h2 ng-if="config.loading.productList">Carregando catálogo... Aguarde...</h2>
     </header>
 
     <section class="product-list-container">
-        <div class="product-card" ng-repeat="product in data.productList">
+        <div class="product-card" ng-repeat="product in data.productList | filter:data.search">
             <a class="product-card-content">
                 <img src="{{product.image}}"/>
                 <p>{{product.name}}</p>

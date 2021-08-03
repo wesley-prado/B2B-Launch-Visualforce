@@ -16,12 +16,18 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
 
     $scope.data = {
         search: null,
+        midSearch: null,
         cart: {
             productList:[]
         },
         account: null,
         accountList:[],
         productList:[]
+    }
+
+    $scope.setSearch = ()=>{
+        $scope.data.search = $scope.data.midSearch
+        $scope.data.midSearch = null
     }
 
     $scope.getCartQuantity = () =>{

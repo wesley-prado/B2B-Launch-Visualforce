@@ -30,9 +30,9 @@
                         </div> 
                         <div class="header-search-container">
                                 <form>
-                                    <input id="header-search" ng-model="data.search"/>
+                                    <input id="header-search" ng-model="data.midSearch"/>
                                     <label for="header-search" id="header-search-label" class="noselect">Procure os melhores produtos.</label>
-                                    <button type="submit">
+                                    <button type="submit" ng-click="setSearch()">
                                         <i class="material-icons">search</i>
                                     </button>
                                 </form>                     

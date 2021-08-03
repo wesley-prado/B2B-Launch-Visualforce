@@ -642,6 +642,7 @@ header .header-search-container form{
 .page-container > header h1{
     font-size: 22px;
     text-align: center;
+    justify-content: center;
 }
 .page-container > header h2{
     font-size: 14px;
