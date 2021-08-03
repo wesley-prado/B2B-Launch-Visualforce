@@ -1,5 +1,5 @@
-const HomeController = ['$scope', '$http','$sce', '$route', '$route', '$location', '$timeout', '$routeParams', function(scope, http, $sce, $route, $location, $timeout, $routeParams){
-    scope.getProductList = async ()=>{
+const HomeController = ['$scope', '$http','$sce', '$route', '$location', '$timeout', '$routeParams', function($scope, $http, $sce, $route, $location, $timeout, $routeParams){
+    $scope.getProductList = async ()=>{
         try {
             return await new Promise((resolve)=>{
                 try {
@@ -30,17 +30,16 @@ const HomeController = ['$scope', '$http','$sce', '$route', '$route', '$location
         }
     }
 
-    scope.handle_getProductList = async ()=>{
-        scope.config.loading.productList = true;
+    $scope.handle_getProductList = async ()=>{
+        $scope.config.loading.productList = true;
         try {
-            let {result, event} = await scope.getProductList()
+            let {result, event} = await $scope.getProductList()
             
 
             if(event && result){
                 if(!result.hasError){
-                    scope.data.productList = result.data
+                    $scope.data.productList = result.data
                 }else{
-                    console.error('error', error),
                     Swal.fire({
                         type: 'warning',
                         title: 'Ooops',
@@ -48,7 +47,6 @@ const HomeController = ['$scope', '$http','$sce', '$route', '$route', '$location
                     })
                 }
             }else{
-                console.error('error', error),
                 Swal.fire({
                     type: 'warning',
                     title: 'Ooops',
@@ -56,18 +54,17 @@ const HomeController = ['$scope', '$http','$sce', '$route', '$route', '$location
                 })
             }
         } catch (error) {
-            console.error('error', error),
             Swal.fire({
                 type: 'warning',
                 title: 'Ooops',
                 html: '[3] Ocorreu um erro, tente novamente mais tarde...'
             })
         }
-        scope.config.loading.productList = false;
-        scope.$apply()
+        $scope.config.loading.productList = false;
+        $scope.$apply()
     }
 
-    scope.init = ()=>{
-        scope.handle_getProductList();
+    $scope.init = ()=>{
+        $scope.handle_getProductList();
     }
 }]
