@@ -22,7 +22,7 @@ public without sharing class LA_ProductController {
             }
 
             for(PricebookEntry pbe: [
-                SELECT UnitPrice, Product2.Id, Product2.Name, Product2.Description
+                SELECT Id, UnitPrice, Product2.Id, Product2.Name, Product2.Description
                 FROM PricebookEntry
                 WHERE Pricebook2Id =: pbId
                 LIMIT 100
@@ -51,6 +51,7 @@ public without sharing class LA_ProductController {
     }
     public class ProductInfo{
         public String  id;
+        public String  pdeId;
         public String  image = 'https://img.simplustec.com.br/product_images/7891515503659/1/7891515503659_1_1_200_72_RGB.png';
         public String  name;
         public String  description;
@@ -60,6 +61,7 @@ public without sharing class LA_ProductController {
         public ProductInfo(){}
         
         public ProductInfo(PricebookEntry pbe){
+            this.pdeId = pbe.Id;
             this.id = pbe.Product2.Id;
             this.name = pbe.Product2.Name;
             this.description = pbe.Product2.Description;

@@ -19,4 +19,8 @@ public without sharing class LA_Controller {
     public static LA_ProductController.ProductDTO getProductList(){
         return LA_ProductController.getProductList();
     }
+    @RemoteAction
+    public static RemotingResult setOrder(LA_OrderController.OrderRequestDTO request){
+        return LA_OrderController.setOrder(request);
+    }
 }

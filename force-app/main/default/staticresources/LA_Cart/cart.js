@@ -1,9 +1,12 @@
-const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location', '$timeout', '$routeParams', function(scope, http, $sce, $route, $location, $timeout, $routeParams){
-    scope.setOrder = async ()=>{
+const CartController = ['$scope', '$http','$sce', '$route', '$location', '$timeout', '$routeParams', function($scope, $http, $sce, $route, $location, $timeout, $routeParams){
+    $scope.setOrder = async ()=>{
         try {
             return await new Promise((resolve)=>{
                 try {
-                    callRemoteAction('LA_Controller.setOrder', null, (result, event)=>{
+                    callRemoteAction('LA_Controller.setOrder', {
+                        accountId: $scope.data.account.id,
+                        productList: angular.fromJson(angular.toJson($scope.data.cart.productList))
+                    }, (result, event)=>{
                         resolve({
                             result,
                             event
@@ -30,10 +33,10 @@ const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location
         }
     }
 
-    scope.handle_setOrder = async ()=>{
-        scope.config.loading.setOrder = true;
+    $scope.handle_setOrder = async ()=>{
+        $scope.config.loading.setOrder = true;
         try {
-            let {result, event} = await scope.setOrder()
+            let {result, event} = await $scope.setOrder()
             
 
             if(event && result){
@@ -42,6 +45,10 @@ const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location
                         type: 'success',
                         title: 'Pedido realizado com sucesso!',
                         html: result.message
+                    }).then((response)=>{
+                        $scope.data.cart.productList = [];
+                        $location.path('/');
+                        $scope.$apply();
                     })
                 }else{
                     console.error('error', error),
@@ -67,11 +74,11 @@ const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location
                 html: '[3] Ocorreu um erro, tente novamente mais tarde...'
             })
         }
-        scope.config.loading.setOrder = false;
-        scope.$apply()
+        $scope.config.loading.setOrder = false;
+        $scope.$apply()
     }
 
-    scope.deleteFromCart = (product, confirm = false)=>{
+    $scope.deleteFromCart = (product, confirm = false)=>{
         if(!confirm){
             Swal.fire({
                 type: 'question',
@@ -82,17 +89,17 @@ const CartController = ['$scope', '$http','$sce', '$route', '$route', '$location
                 cancelButtonText: 'Não, manter produto.'
             }).then((response)=>{
                 if(response.value){
-                    scope.deleteFromCart(product, true)
+                    $scope.deleteFromCart(product, true)
                 }
             })
             return false;
         }
-        let index = scope.data.cart.productList.findIndex(p => p.id == product.id);
-        scope.data.cart.productList.splice(index, 1);
-        scope.$apply()
+        let index = $scope.data.cart.productList.findIndex(p => p.id == product.id);
+        $scope.data.cart.productList.splice(index, 1);
+        $scope.$apply()
     };
 
-    scope.init = ()=>{
+    $scope.init = ()=>{
         // scope.handle_getProductList();
     }
 }]
