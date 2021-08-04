@@ -12,6 +12,10 @@
             templateUrl: resource['cart'],
             controller: 'CartCtrl'
       })
+        .when('/pedidos',{
+            templateUrl: resource['order'],
+            controller: 'OrderCtrl'
+      })
         .when('/404',{
             templateUrl: resource['404'],
             controller: '404Ctrl'
@@ -26,4 +30,5 @@
     laApp.controller('HomeCtrl', HomeController)
     laApp.controller('CartCtrl', CartController)
     laApp.controller('404Ctrl', C404Controller)
+    laApp.controller('OrderCtrl', OrderController)
 })();

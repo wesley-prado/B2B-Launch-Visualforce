@@ -52,7 +52,7 @@
                                         <a href="#/">Início</a>
                                     </li>
                                     <li>
-                                        <a>Meus pedidos</a>
+                                        <a href="#/pedidos">Meus pedidos</a>
                                     </li>
                                     <li>
                                         <a ng-click="setShowModal()">Trocar conta</a>
@@ -120,7 +120,7 @@
                         </span>
                         <p>Contas</p>
                     </a>
-                    <a class="footer-menu-item {{getMenuActivated('pedidos') ? 'active' : ''}}">
+                    <a href="#/pedidos" class="footer-menu-item {{getMenuActivated('pedidos') ? 'active' : ''}}">
                         <span>
                             <i class="material-icons">local_shipping</i>
                         </span>

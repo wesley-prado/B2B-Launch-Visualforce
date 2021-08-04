@@ -1,72 +1,139 @@
-<link href="{{CSS.cart}}" rel="stylesheet"/>
+<link href="{{CSS.order}}" rel="stylesheet"/>
 
 <div class="page-container" ng-init="init()">
-    <header>
+    <header class="order-header">
         <h1>Carrinho</h1>
-        <h2>Comprando para: <strong>{{data.account.name}}</strong></h2>
+        <h2>Visualizando pedidos de: <span>Todas as contas <i class="material-icons">keyboard_arrow_down</i></span></h2>
     </header>
 
-    <section class="page-cart-container">
-        <div class="cart-content">
-            <table>
-                <tbody>
-                    <tr ng-repeat="product in data.cart.productList">
-                        <td>
-                            <a href="#/produto/{{product.id}}">
-                                <img src="{{product.image}}"/>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="#/produto/{{product.id}}">
-                                <p>{{product.name}}</p>
-                                <h4>{{formatPrice(product.price)}}</h4>
-                            </a>
-
-                        </td>
-                        <td class="cart-content-quantity-price">
-                            <h3>{{formatPrice(product.price * product.qtd)}}</h3>
-                            <div class="product-quantity-container">
-                                <button ng-click="removeProductQuantity(product)" ng-if="product.qtd > 1">
-                                    <i class="material-icons">remove</i>
-                                </button>
-                                <button ng-click="deleteFromCart(product)" ng-if="product.qtd <= 1" class="product-quantity-delete">
-                                    <i class="material-icons">delete</i>
-                                </button>
-                                <input type="number" ng-model="product.qtd" readonly/>
-                                <button ng-click="addProductQuantity(product)">
-                                    <i class="material-icons">add</i>
-                                </button>
+    <body>
+        <section>
+            <ul class="order-ul">
+                <li class="order-li">
+                    <div class="order-info-container">
+                        <div class="order-info-date-box">
+                            <h3>28</h3>
+                            <h4>julho de 2021</h4>
+                        </div>
+                        <div class="order-info">
+                            <div class="order-info-order-span-container">
+                                <div class="order-info-order-span-wrapper">
+                                    <span>Pedido</span>
+                                    <span class="order-info-number">#000</span>
+                                </div>
+                                <span class="order-price mobile">R$ 250,00</span>
                             </div>
-                        </td>
-                        <td class="cart-content-price">
-                            <h3>{{formatPrice(product.price * product.qtd)}}</h3>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <aside class="cart-summary">
-            <h1>Total da compra</h1>
-            <div>
-                <h2>{{formatPrice(getCartPrice())}}</h2>
-                <h3><strong>{{getCartQuantity()}}</strong> produtos</h3>
-            </div>
-            <button ng-click="handle_setOrder()" ng-disabled="getCartQuantity() < 1 || config.loading.setOrder">{{config.loading.setOrder ? 'Enviando pedido...' : 'Comprar'}}</button>
-        </aside>
-    </section>
-    <!-- Mobile -->
-    <a ng-click="handle_setOrder()" href="#/carrinho" class="footer-cart cart-confirm-button {{config.loading.setOrder && 'disabled'}}" ng-if="getCartQuantity() > 0" >
-        <div class="footer-cart-item">
-            <span class="cart-icon">
-                <i class="material-icons">shopping_cart</i>
-                <span>{{getCartQuantity()}}</span>
-            </span> 
-        </div>
-        <div class="footer-cart-item footer-cart-item-text">
-            <p>{{config.loading.setOrder ? 'Enviando...' : 'Comprar'}}</p>
-        </div>
-        <div class="footer-cart-item footer-cart-item-price">
-            <p>{{formatPrice(getCartPrice())}}</p>
-        </div>
-    </a>
+                            <span>Conta ABC</span>
+                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
+                        </div>
+                    </div>
+                    <div class="order-button-container">
+                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
+                        <a href="#/pedido/000">Ver pedido</a>
+                        <span class="order-price desktop">R$ 250,00</span>
+                    </div>
+                </li>
+
+                <li class="order-li">
+                    <div class="order-info-container">
+                        <div class="order-info-date-box">
+                            <h3>28</h3>
+                            <h4>julho de 2021</h4>
+                        </div>
+                        <div class="order-info">
+                            <div class="order-info-order-span-container">
+                                <div class="order-info-order-span-wrapper">
+                                    <span>Pedido</span>
+                                    <span class="order-info-number">#000</span>
+                                </div>
+                                <span class="order-price mobile">R$ 250,00</span>
+                            </div>
+                            <span>Conta ABC</span>
+                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
+                        </div>
+                    </div>
+                    <div class="order-button-container">
+                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
+                        <a href="#/pedido/000">Ver pedido</a>
+                        <span class="order-price desktop">R$ 250,00</span>
+                    </div>
+                </li>
+
+                <li class="order-li">
+                    <div class="order-info-container">
+                        <div class="order-info-date-box">
+                            <h3>28</h3>
+                            <h4>julho de 2021</h4>
+                        </div>
+                        <div class="order-info">
+                            <div class="order-info-order-span-container">
+                                <div class="order-info-order-span-wrapper">
+                                    <span>Pedido</span>
+                                    <span class="order-info-number">#000</span>
+                                </div>
+                                <span class="order-price mobile">R$ 250,00</span>
+                            </div>
+                            <span>Conta ABC</span>
+                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
+                        </div>
+                    </div>
+                    <div class="order-button-container">
+                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
+                        <a href="#/pedido/000">Ver pedido</a>
+                        <span class="order-price desktop">R$ 250,00</span>
+                    </div>
+                </li>
+
+                <li class="order-li">
+                    <div class="order-info-container">
+                        <div class="order-info-date-box">
+                            <h3>28</h3>
+                            <h4>julho de 2021</h4>
+                        </div>
+                        <div class="order-info">
+                            <div class="order-info-order-span-container">
+                                <div class="order-info-order-span-wrapper">
+                                    <span>Pedido</span>
+                                    <span class="order-info-number">#000</span>
+                                </div>
+                                <span class="order-price mobile">R$ 250,00</span>
+                            </div>
+                            <span>Conta ABC</span>
+                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
+                        </div>
+                    </div>
+                    <div class="order-button-container">
+                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
+                        <a href="#/pedido/000">Ver pedido</a>
+                        <span class="order-price desktop">R$ 250,00</span>
+                    </div>
+                </li>
+
+                <li class="order-li">
+                    <div class="order-info-container">
+                        <div class="order-info-date-box">
+                            <h3>28</h3>
+                            <h4>julho de 2021</h4>
+                        </div>
+                        <div class="order-info">
+                            <div class="order-info-order-span-container">
+                                <div class="order-info-order-span-wrapper">
+                                    <span>Pedido</span>
+                                    <span class="order-info-number">#000</span>
+                                </div>
+                                <span class="order-price mobile">R$ 250,00</span>
+                            </div>
+                            <span>Conta ABC</span>
+                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
+                        </div>
+                    </div>
+                    <div class="order-button-container">
+                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
+                        <a href="#/pedido/000">Ver pedido</a>
+                        <span class="order-price desktop">R$ 250,00</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </body>
 </div>

@@ -75,6 +75,7 @@ public without sharing class LA_OrderController {
         return result;
     }
 
+    // public static OrderInfoDTO
     public class OrderRequestDTO {
         public String accountId;
         public List<LA_ProductController.ProductInfo> productList = new List<LA_ProductController.ProductInfo>();
