@@ -1,5 +1,11 @@
 const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$timeout', '$routeParams', function($scope, $http, $sce, $route, $location, $timeout, $routeParams){
 
+    $scope.OrderConfig = {
+        show:{
+            OrderModal: false
+        }
+    }
+
     $scope.getOrders = async ()=>{
         return await new Promise(resolve =>{
             try {
@@ -22,11 +28,12 @@ const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$time
     }
 
     $scope.handle_getOrders = async ()=>{
+        $scope.config.loading.orderList = true
         try {
             let {result, event} = await $scope.getOrders()
             if(event && result){
-                $scope.data.orderList = result;
-                $scope.$apply()
+                $scope.data.order.orderList = result;
+                getOrderAccountsSet(result)
             }
         } catch (e) {
             console.error('error', e)
@@ -35,7 +42,28 @@ const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$time
                 title: 'Ooops',
                 html: '[2] Ocorreu um erro, tente novamente mais tarde...'
             })
-        }    
+        }
+        $scope.config.loading.orderList = false
+        $scope.$apply()
+    }
+
+    function getOrderAccountsSet(result){
+        const set = new Set()
+        for(let i = 0; i < result.length; i++){
+            set.add(result[i].accountName)
+        }
+        $scope.data.order.accountsWithOrder = Array.from(set)
+    }
+
+    $scope.setOrderFilter = (accountName)=>{
+        $scope.data.order.orderFilter = accountName;
+        $scope.setHideOrderModal()
+    }
+    $scope.setShowOrderModal = ()=>{
+        $scope.OrderConfig.show.OrderModal = true
+    }
+    $scope.setHideOrderModal = ()=>{
+        $scope.OrderConfig.show.OrderModal = false
     }
 
     $scope.init = ()=>{

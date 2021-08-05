@@ -1,39 +1,68 @@
-<link href="{{CSS.order}}" rel="stylesheet"/>
+<link href="{{CSS.order}}" rel="stylesheet" />
 
 <div class="page-container" ng-init="init()">
     <header class="order-header">
         <h1>Carrinho</h1>
-        <h2>Visualizando pedidos de: <span>Todas as contas <i class="material-icons">keyboard_arrow_down</i></span></h2>
+        <h2 ng-if="config.loading.orderList">Carregando pedidos...</h2>
+        <h2 ng-if="!config.loading.orderList">Visualizando pedidos de: <span ng-click="setShowOrderModal()">{{data.order.orderFilter || 'Todas as
+                contas'}} <i class="material-icons">keyboard_arrow_down</i></span></h2>
     </header>
-
-    <body>
-        <section>
-            <ul class="order-ul">
-                <li class="order-li" ng-repeat="order in data.orderList">
-                    <div class="order-info-container">
-                        <div class="order-info-date-box">
-                            <h3>{{formatDate(order.effectiveDate, {day: 'numeric'})}}</h3>
-                        <h4 resize>{{width >= 426 ? formatDate(order.effectiveDate, {month: 'long', year: 'numeric'}) : formatDate(order.effectiveDate, {month: 'numeric', year: 'numeric'})}}</h4>
-                        </div>
-                        <div class="order-info">
-                            <div class="order-info-order-span-container">
-                                <div class="order-info-order-span-wrapper">
-                                    <span>Pedido</span>
-                                    <span class="order-info-number">#{{order.orderNumber}}</span>
-                                </div>
-                                <span class="order-price mobile">{{formatPrice(order.totalAmount)}}</span>
+    <section>
+        <ul class="order-ul">
+            <li class="order-li" ng-repeat="order in data.order.orderList | filter: data.order.orderFilter">
+                <div class="order-info-container">
+                    <div class="order-info-date-box">
+                        <h3>{{formatDate(order.effectiveDate, {day: 'numeric'})}}</h3>
+                        <h4 resize>{{width >= 426 ? formatDate(order.effectiveDate, {month: 'long', year: 'numeric'}) :
+                            formatDate(order.effectiveDate, {month: 'numeric', year: 'numeric'})}}</h4>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-info-order-span-container">
+                            <div class="order-info-order-span-wrapper">
+                                <span>Pedido</span>
+                                <span class="order-info-number">#{{order.orderNumber}}</span>
                             </div>
-                            <span>{{order.accountName}}</span>
-                            <span class="order-product-quantity desktop"><strong>{{order.itemQuantity}}</strong> produtos</span>
+                            <span class="order-price mobile">{{formatPrice(order.totalAmount)}}</span>
                         </div>
+                        <span>{{order.accountName}}</span>
+                        <span class="order-product-quantity desktop"><strong>{{order.itemQuantity}}</strong>
+                            produtos</span>
                     </div>
-                    <div class="order-button-container">
-                        <span class="order-product-quantity mobile"><strong>{{order.itemQuantity}}</strong> produtos</span>
-                        <a>Ver pedido</a>
-                        <span class="order-price desktop">{{formatPrice(order.totalAmount)}}</span>
-                    </div>
-                </li>
-            </ul>
-        </section>
-    </body>
+                </div>
+                <div class="order-button-container">
+                    <span class="order-product-quantity mobile"><strong>{{order.itemQuantity}}</strong> produtos</span>
+                    <a>Ver pedido</a>
+                    <span class="order-price desktop">{{formatPrice(order.totalAmount)}}</span>
+                </div>
+            </li>
+        </ul>
+
+    </section>
+    <section class="modal-container {{OrderConfig.show.OrderModal ? 'active' : ''}}">
+        <div class="modal-box">
+            <header>
+                <h1>Selecione uma conta para filtrar</h1>
+            </header>
+            <div class="modal-content">
+                <ul class="modal-list">
+                    <li>
+                        <div class="modal-list-item">
+                            <div>
+                                <h3>Todas as contas (Padrão)</h3>
+                            </div>
+                            <button ng-click="setOrderFilter(null)">Selecionar</button>
+                        </div>
+                    </li>
+                    <li ng-repeat="accountName in data.order.accountsWithOrder">
+                        <div class="modal-list-item">
+                            <div>
+                                <h3>{{accountName}}</h3>
+                            </div>
+                            <button ng-click="setOrderFilter(accountName)">Selecionar</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </div>
