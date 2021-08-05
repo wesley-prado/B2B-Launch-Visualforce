@@ -1,105 +1,72 @@
-const CartController = ['$scope', '$http','$sce', '$route', '$location', '$timeout', '$routeParams', function($scope, $http, $sce, $route, $location, $timeout, $routeParams){
-    $scope.setOrder = async ()=>{
-        try {
-            return await new Promise((resolve)=>{
-                try {
-                    callRemoteAction('LA_Controller.setOrder', {
-                        accountId: $scope.data.account.id,
-                        productList: angular.fromJson(angular.toJson($scope.data.cart.productList))
-                    }, (result, event)=>{
-                        resolve({
-                            result,
-                            event
-                        })
-                    });
-                } catch (e) {
-                    console.error('error', error),
-                    Swal.fire({
-                        type: 'warning',
-                        title: 'Ooops',
-                        html: '[1] Ocorreu um erro, tente novamente mais tarde...'
+const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$timeout', '$routeParams', function($scope, $http, $sce, $route, $location, $timeout, $routeParams){
+
+    $scope.OrderConfig = {
+        show:{
+            OrderModal: false
+        }
+    }
+
+    $scope.getOrders = async ()=>{
+        return await new Promise(resolve =>{
+            try {
+                callRemoteAction('LA_Controller.getOrders',null,(result,event)=>{
+                    resolve({
+                        result,
+                        event
                     })
-                    return error
-                }
-            })
-        } catch (error) {
-            console.error('error', error),
+                })
+            } catch (e) {
+                console.error('error', error),
+                Swal.fire({
+                    type: 'warning',
+                    title: 'Ooops',
+                    html: '[1] Ocorreu um erro, tente novamente mais tarde...'
+                })
+                return error
+            }
+        })
+    }
+
+    $scope.handle_getOrders = async ()=>{
+        $scope.config.loading.orderList = true
+        try {
+            let {result, event} = await $scope.getOrders()
+            if(event && result){
+                $scope.data.order.orderList = result;
+                getOrderAccountsSet(result)
+            }
+        } catch (e) {
+            console.error('error', e)
             Swal.fire({
                 type: 'warning',
                 title: 'Ooops',
                 html: '[2] Ocorreu um erro, tente novamente mais tarde...'
             })
-            return error
         }
-    }
-
-    $scope.handle_setOrder = async ()=>{
-        $scope.config.loading.setOrder = true;
-        try {
-            let {result, event} = await $scope.setOrder()
-            
-
-            if(event && result){
-                if(!result.hasError){
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Pedido realizado com sucesso!',
-                        html: result.message
-                    }).then((response)=>{
-                        $scope.data.cart.productList = [];
-                        $location.path('/');
-                        $scope.$apply();
-                    })
-                }else{
-                    console.error('error', error),
-                    Swal.fire({
-                        type: 'warning',
-                        title: 'Ooops',
-                        html: result.message
-                    })
-                }
-            }else{
-                console.error('error', error),
-                Swal.fire({
-                    type: 'warning',
-                    title: 'Ooops',
-                    html: '[4] Ocorreu um erro, tente novamente mais tarde...'
-                })
-            }
-        } catch (error) {
-            console.error('error', error),
-            Swal.fire({
-                type: 'warning',
-                title: 'Ooops',
-                html: '[3] Ocorreu um erro, tente novamente mais tarde...'
-            })
-        }
-        $scope.config.loading.setOrder = false;
+        $scope.config.loading.orderList = false
         $scope.$apply()
     }
 
-    $scope.deleteFromCart = (product, confirm = false)=>{
-        if(!confirm){
-            Swal.fire({
-                type: 'question',
-                title: 'Tem certeza?',
-                html: "Deseja remover <strong>"+product.name+"</strong> do carrinho?",
-                confirmButtonText: 'Sim, desejo remover.',
-                showCancelButton: true,
-                cancelButtonText: 'Não, manter produto.'
-            }).then((response)=>{
-                if(response.value){
-                    $scope.deleteFromCart(product, true)
-                }
-            })
-            return false;
+    function getOrderAccountsSet(result){
+        const set = new Set()
+        for(let i = 0; i < result.length; i++){
+            set.add(result[i].accountName)
         }
-        let index = $scope.data.cart.productList.findIndex(p => p.id == product.id);
-        $scope.data.cart.productList.splice(index, 1);
-        $scope.$apply()
-    };
+        $scope.data.order.accountsWithOrder = Array.from(set)
+    }
+
+    $scope.setOrderFilter = (accountName)=>{
+        $scope.data.order.orderFilter = accountName;
+        $scope.setHideOrderModal()
+    }
+    $scope.setShowOrderModal = ()=>{
+        $scope.OrderConfig.show.OrderModal = true
+    }
+    $scope.setHideOrderModal = ()=>{
+        $scope.OrderConfig.show.OrderModal = false
+    }
 
     $scope.init = ()=>{
-        // scope.handle_getProductList();
+        $scope.handle_getOrders()
     }
 }]

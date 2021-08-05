@@ -9,10 +9,9 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
         loading:{
             productList: false,
             setOrder: false,
+            orderList: false
         }
     }
-
-    $scope.formatPrice = formatPrice;
 
     $scope.data = {
         search: null,
@@ -22,8 +21,21 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
         },
         account: null,
         accountList:[],
-        productList:[]
+        productList:[],
+        order:{
+            orderList: [],
+            accountsWithOrder: [],
+            orderFilter: null
+        }        
     }
+
+    $scope.formatPrice = formatPrice;
+
+    $scope.formatDate = (date, options)=>{
+        console.log(options)
+        return new Date(date).toLocaleString('pt-BR', {...options, timeZone: 'UTC'});
+    }
+
 
     $scope.setSearch = ()=>{
         $scope.data.search = $scope.data.midSearch

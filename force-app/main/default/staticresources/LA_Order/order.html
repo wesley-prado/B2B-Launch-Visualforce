@@ -1,72 +1,68 @@
-<link href="{{CSS.cart}}" rel="stylesheet"/>
+<link href="{{CSS.order}}" rel="stylesheet" />
 
 <div class="page-container" ng-init="init()">
-    <header>
+    <header class="order-header">
         <h1>Carrinho</h1>
-        <h2>Comprando para: <strong>{{data.account.name}}</strong></h2>
+        <h2 ng-if="config.loading.orderList">Carregando pedidos...</h2>
+        <h2 ng-if="!config.loading.orderList">Visualizando pedidos de: <span ng-click="setShowOrderModal()">{{data.order.orderFilter || 'Todas as
+                contas'}} <i class="material-icons">keyboard_arrow_down</i></span></h2>
     </header>
-
-    <section class="page-cart-container">
-        <div class="cart-content">
-            <table>
-                <tbody>
-                    <tr ng-repeat="product in data.cart.productList">
-                        <td>
-                            <a href="#/produto/{{product.id}}">
-                                <img src="{{product.image}}"/>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="#/produto/{{product.id}}">
-                                <p>{{product.name}}</p>
-                                <h4>{{formatPrice(product.price)}}</h4>
-                            </a>
-
-                        </td>
-                        <td class="cart-content-quantity-price">
-                            <h3>{{formatPrice(product.price * product.qtd)}}</h3>
-                            <div class="product-quantity-container">
-                                <button ng-click="removeProductQuantity(product)" ng-if="product.qtd > 1">
-                                    <i class="material-icons">remove</i>
-                                </button>
-                                <button ng-click="deleteFromCart(product)" ng-if="product.qtd <= 1" class="product-quantity-delete">
-                                    <i class="material-icons">delete</i>
-                                </button>
-                                <input type="number" ng-model="product.qtd" readonly/>
-                                <button ng-click="addProductQuantity(product)">
-                                    <i class="material-icons">add</i>
-                                </button>
+    <section>
+        <ul class="order-ul">
+            <li class="order-li" ng-repeat="order in data.order.orderList | filter: data.order.orderFilter">
+                <div class="order-info-container">
+                    <div class="order-info-date-box">
+                        <h3>{{formatDate(order.effectiveDate, {day: 'numeric'})}}</h3>
+                        <h4 resize>{{width >= 426 ? formatDate(order.effectiveDate, {month: 'long', year: 'numeric'}) :
+                            formatDate(order.effectiveDate, {month: 'numeric', year: 'numeric'})}}</h4>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-info-order-span-container">
+                            <div class="order-info-order-span-wrapper">
+                                <span>Pedido</span>
+                                <span class="order-info-number">#{{order.orderNumber}}</span>
                             </div>
-                        </td>
-                        <td class="cart-content-price">
-                            <h3>{{formatPrice(product.price * product.qtd)}}</h3>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <aside class="cart-summary">
-            <h1>Total da compra</h1>
-            <div>
-                <h2>{{formatPrice(getCartPrice())}}</h2>
-                <h3><strong>{{getCartQuantity()}}</strong> produtos</h3>
-            </div>
-            <button ng-click="handle_setOrder()" ng-disabled="getCartQuantity() < 1 || config.loading.setOrder">{{config.loading.setOrder ? 'Enviando pedido...' : 'Comprar'}}</button>
-        </aside>
+                            <span class="order-price mobile">{{formatPrice(order.totalAmount)}}</span>
+                        </div>
+                        <span>{{order.accountName}}</span>
+                        <span class="order-product-quantity desktop"><strong>{{order.itemQuantity}}</strong>
+                            produtos</span>
+                    </div>
+                </div>
+                <div class="order-button-container">
+                    <span class="order-product-quantity mobile"><strong>{{order.itemQuantity}}</strong> produtos</span>
+                    <a>Ver pedido</a>
+                    <span class="order-price desktop">{{formatPrice(order.totalAmount)}}</span>
+                </div>
+            </li>
+        </ul>
+
     </section>
-    <!-- Mobile -->
-    <a ng-click="handle_setOrder()" href="#/carrinho" class="footer-cart cart-confirm-button {{config.loading.setOrder && 'disabled'}}" ng-if="getCartQuantity() > 0" >
-        <div class="footer-cart-item">
-            <span class="cart-icon">
-                <i class="material-icons">shopping_cart</i>
-                <span>{{getCartQuantity()}}</span>
-            </span> 
+    <section class="modal-container {{OrderConfig.show.OrderModal ? 'active' : ''}}">
+        <div class="modal-box">
+            <header>
+                <h1>Selecione uma conta para filtrar</h1>
+            </header>
+            <div class="modal-content">
+                <ul class="modal-list">
+                    <li>
+                        <div class="modal-list-item">
+                            <div>
+                                <h3>Todas as contas (Padrão)</h3>
+                            </div>
+                            <button ng-click="setOrderFilter(null)">Selecionar</button>
+                        </div>
+                    </li>
+                    <li ng-repeat="accountName in data.order.accountsWithOrder">
+                        <div class="modal-list-item">
+                            <div>
+                                <h3>{{accountName}}</h3>
+                            </div>
+                            <button ng-click="setOrderFilter(accountName)">Selecionar</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="footer-cart-item footer-cart-item-text">
-            <p>{{config.loading.setOrder ? 'Enviando...' : 'Comprar'}}</p>
-        </div>
-        <div class="footer-cart-item footer-cart-item-price">
-            <p>{{formatPrice(getCartPrice())}}</p>
-        </div>
-    </a>
+    </section>
 </div>
