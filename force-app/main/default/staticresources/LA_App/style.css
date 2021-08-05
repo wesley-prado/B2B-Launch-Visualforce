@@ -297,10 +297,12 @@ header .cart-container a span,
     background-color: transparent;
 }
 .modal-container .modal-box header h1{
+    color: var(--color-black);
     font-size: 28px;
     font-weight: var(--bold);
 }
 .modal-container .modal-box header h2{
+    color: var(--color-black);
     font-size: 22px;
     font-weight: var(--regular);
 }
@@ -320,6 +322,10 @@ header .cart-container a span,
     display:flex;
     justify-content: space-between;
     align-items: center;
+}
+.modal-container .modal-list-item h3,
+.modal-container .modal-list-item p{
+    color:var(--color-black)
 }
 .modal-container .modal-list-item h3{
     font-size: 22px;
@@ -618,6 +624,7 @@ header .header-search-container form{
 
     border-radius: 0;
 }
+
 .modal-container .modal-box header h1,
 .modal-container .modal-box header h2{
     text-align: center;
@@ -625,10 +632,10 @@ header .header-search-container form{
 .modal-container .modal-box header h2{
     padding:0 40px;
 }
-.modal-container .modal-box .modal-list-item h3{
+.modal-container .modal-box .modal-list-item div h3{
     font-size: 16px;
 }
-.modal-container .modal-box .modal-list-item p{
+.modal-container .modal-box .modal-list-item div p{
     font-size: 12px;
 }
 .modal-container .modal-box .modal-list-item button{

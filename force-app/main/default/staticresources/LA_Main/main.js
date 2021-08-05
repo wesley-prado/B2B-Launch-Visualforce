@@ -32,7 +32,6 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
     $scope.formatPrice = formatPrice;
 
     $scope.formatDate = (date, options)=>{
-        console.log(options)
         return new Date(date).toLocaleString('pt-BR', {...options, timeZone: 'UTC'});
     }
 

@@ -40,15 +40,16 @@
     </section>
     <section class="modal-container {{OrderConfig.show.OrderModal ? 'active' : ''}}">
         <div class="modal-box">
-            <header>
-                <h1>Selecione uma conta para filtrar</h1>
+            <header class="order-modal-header">
+                <h1>Selecione uma conta</h1>
+                <h2>A lista mostrará os pedidos da conta escolhida</h2>
             </header>
             <div class="modal-content">
                 <ul class="modal-list">
                     <li>
                         <div class="modal-list-item">
                             <div>
-                                <h3>Todas as contas (Padrão)</h3>
+                                <h3>Todas as contas</h3>
                             </div>
                             <button ng-click="setOrderFilter(null)">Selecionar</button>
                         </div>

@@ -125,7 +125,6 @@
 }
 /* MIN-WIDTH */
 @media (min-width: 769px){
-
 } 
 @media (min-width: 426px){
     .mobile{
@@ -202,4 +201,5 @@
         width: 150px;
     }
     /* MODAL */
+
 }
