@@ -9,128 +9,28 @@
     <body>
         <section>
             <ul class="order-ul">
-                <li class="order-li">
+                <li class="order-li" ng-repeat="order in data.orderList">
                     <div class="order-info-container">
                         <div class="order-info-date-box">
-                            <h3>28</h3>
-                            <h4>julho de 2021</h4>
+                            <h3>{{formatDate(order.effectiveDate, {day: 'numeric'})}}</h3>
+                        <h4 resize>{{width >= 426 ? formatDate(order.effectiveDate, {month: 'long', year: 'numeric'}) : formatDate(order.effectiveDate, {month: 'numeric', year: 'numeric'})}}</h4>
                         </div>
                         <div class="order-info">
                             <div class="order-info-order-span-container">
                                 <div class="order-info-order-span-wrapper">
                                     <span>Pedido</span>
-                                    <span class="order-info-number">#000</span>
+                                    <span class="order-info-number">#{{order.orderNumber}}</span>
                                 </div>
-                                <span class="order-price mobile">R$ 250,00</span>
+                                <span class="order-price mobile">{{formatPrice(order.totalAmount)}}</span>
                             </div>
-                            <span>Conta ABC</span>
-                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
+                            <span>{{order.accountName}}</span>
+                            <span class="order-product-quantity desktop"><strong>{{order.itemQuantity}}</strong> produtos</span>
                         </div>
                     </div>
                     <div class="order-button-container">
-                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
-                        <a href="#/pedido/000">Ver pedido</a>
-                        <span class="order-price desktop">R$ 250,00</span>
-                    </div>
-                </li>
-
-                <li class="order-li">
-                    <div class="order-info-container">
-                        <div class="order-info-date-box">
-                            <h3>28</h3>
-                            <h4>julho de 2021</h4>
-                        </div>
-                        <div class="order-info">
-                            <div class="order-info-order-span-container">
-                                <div class="order-info-order-span-wrapper">
-                                    <span>Pedido</span>
-                                    <span class="order-info-number">#000</span>
-                                </div>
-                                <span class="order-price mobile">R$ 250,00</span>
-                            </div>
-                            <span>Conta ABC</span>
-                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
-                        </div>
-                    </div>
-                    <div class="order-button-container">
-                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
-                        <a href="#/pedido/000">Ver pedido</a>
-                        <span class="order-price desktop">R$ 250,00</span>
-                    </div>
-                </li>
-
-                <li class="order-li">
-                    <div class="order-info-container">
-                        <div class="order-info-date-box">
-                            <h3>28</h3>
-                            <h4>julho de 2021</h4>
-                        </div>
-                        <div class="order-info">
-                            <div class="order-info-order-span-container">
-                                <div class="order-info-order-span-wrapper">
-                                    <span>Pedido</span>
-                                    <span class="order-info-number">#000</span>
-                                </div>
-                                <span class="order-price mobile">R$ 250,00</span>
-                            </div>
-                            <span>Conta ABC</span>
-                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
-                        </div>
-                    </div>
-                    <div class="order-button-container">
-                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
-                        <a href="#/pedido/000">Ver pedido</a>
-                        <span class="order-price desktop">R$ 250,00</span>
-                    </div>
-                </li>
-
-                <li class="order-li">
-                    <div class="order-info-container">
-                        <div class="order-info-date-box">
-                            <h3>28</h3>
-                            <h4>julho de 2021</h4>
-                        </div>
-                        <div class="order-info">
-                            <div class="order-info-order-span-container">
-                                <div class="order-info-order-span-wrapper">
-                                    <span>Pedido</span>
-                                    <span class="order-info-number">#000</span>
-                                </div>
-                                <span class="order-price mobile">R$ 250,00</span>
-                            </div>
-                            <span>Conta ABC</span>
-                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
-                        </div>
-                    </div>
-                    <div class="order-button-container">
-                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
-                        <a href="#/pedido/000">Ver pedido</a>
-                        <span class="order-price desktop">R$ 250,00</span>
-                    </div>
-                </li>
-
-                <li class="order-li">
-                    <div class="order-info-container">
-                        <div class="order-info-date-box">
-                            <h3>28</h3>
-                            <h4>julho de 2021</h4>
-                        </div>
-                        <div class="order-info">
-                            <div class="order-info-order-span-container">
-                                <div class="order-info-order-span-wrapper">
-                                    <span>Pedido</span>
-                                    <span class="order-info-number">#000</span>
-                                </div>
-                                <span class="order-price mobile">R$ 250,00</span>
-                            </div>
-                            <span>Conta ABC</span>
-                            <span class="order-product-quantity desktop"><strong>5</strong> produtos</span>
-                        </div>
-                    </div>
-                    <div class="order-button-container">
-                        <span class="order-product-quantity mobile"><strong>5</strong> produtos</span>
-                        <a href="#/pedido/000">Ver pedido</a>
-                        <span class="order-price desktop">R$ 250,00</span>
+                        <span class="order-product-quantity mobile"><strong>{{order.itemQuantity}}</strong> produtos</span>
+                        <a>Ver pedido</a>
+                        <span class="order-price desktop">{{formatPrice(order.totalAmount)}}</span>
                     </div>
                 </li>
             </ul>

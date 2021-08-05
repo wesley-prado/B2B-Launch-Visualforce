@@ -1,6 +1,19 @@
 (function(){
     let laApp = angular.module('laApp', ['ngRoute','ngLocationUpdate'])
 
+    laApp.directive('resize', function ($window) {
+        return function (scope) {
+            scope.width = $window.innerWidth;
+            scope.height = $window.innerHeight;
+            angular.element($window).bind('resize', function () {
+                scope.$apply(function () {
+                    scope.width = $window.innerWidth;
+                    scope.height = $window.innerHeight;
+                });
+            });
+            };
+        });
+
     laApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
         let resource = window.resource.HTML
         $routeProvider

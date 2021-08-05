@@ -75,7 +75,47 @@ public without sharing class LA_OrderController {
         return result;
     }
 
-    // public static OrderInfoDTO
+    public static List<OrderInfoDTO> getOrders(){
+        List<OrderInfoDTO> orderList = new List<OrderInfoDTO>();
+
+        for(Order order : [
+            SELECT EffectiveDate, OrderNumber, Account.Name, TotalAmount,
+            (SELECT Quantity from OrderItems)
+            FROM Order
+            WHERE TotalAmount > 0
+            ORDER BY EffectiveDate DESC
+        ]){
+            orderList.add(new OrderInfoDTO(order));
+        }
+
+        return orderList;
+    }
+
+    public class OrderInfoDTO{
+        public String effectiveDate;
+        public String orderNumber;
+        public String accountName;
+        public Decimal itemQuantity;
+        public Decimal totalAmount;
+
+        public OrderInfoDTO(Order order){
+          this.effectiveDate = String.valueOf(order.effectiveDate);
+          this.orderNumber = order.orderNumber;
+          this.accountName = order.Account.Name;
+          this.totalAmount = order.TotalAmount;
+          this.itemQuantity = this.sumQuantity(order.OrderItems);
+        }
+
+        private Decimal sumQuantity(List<OrderItem> oiList){
+            Decimal sum = 0;
+            for(OrderItem orderItem : oiList){
+                sum += orderItem.Quantity;
+            }
+
+            return sum;
+        }
+    }
+
     public class OrderRequestDTO {
         public String accountId;
         public List<LA_ProductController.ProductInfo> productList = new List<LA_ProductController.ProductInfo>();
