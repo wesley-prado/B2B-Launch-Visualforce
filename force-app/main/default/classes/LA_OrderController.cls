@@ -75,35 +75,50 @@ public without sharing class LA_OrderController {
         return result;
     }
 
-    public static List<OrderInfoDTO> getOrders(){
-        List<OrderInfoDTO> orderList = new List<OrderInfoDTO>();
+    public static OrderInfoDTO getOrders(){
+        OrderInfoDTO orderList = new OrderInfoDTO();
 
         for(Order order : [
-            SELECT EffectiveDate, OrderNumber, Account.Name, TotalAmount,
+            SELECT Id, EffectiveDate, OrderNumber, Account.Name, TotalAmount,
             (SELECT Quantity from OrderItems)
             FROM Order
             WHERE TotalAmount > 0
             ORDER BY EffectiveDate DESC
         ]){
-            orderList.add(new OrderInfoDTO(order));
+            orderList.data.add(new OrderInfo(order));
         }
 
         return orderList;
     }
 
-    public class OrderInfoDTO{
+    public class OrderInfoDTO extends RemotingResult{
+        List<OrderInfo> data = new List<OrderInfo>();
+
+        public OrderInfoDTO(){
+            super();
+        }
+        public OrderInfoDTO(Exception ex){
+            super(ex);
+        }
+        public OrderInfoDTO(Boolean hasError, String message){
+            super(hasError, message);
+        }
+    }
+    public class OrderInfo{
+        public String id;
         public String effectiveDate;
         public String orderNumber;
         public String accountName;
         public Decimal itemQuantity;
         public Decimal totalAmount;
 
-        public OrderInfoDTO(Order order){
+        public OrderInfo(Order order){
+          this.id = order.Id;
           this.effectiveDate = String.valueOf(order.effectiveDate);
           this.orderNumber = order.orderNumber;
           this.accountName = order.Account.Name;
           this.totalAmount = order.TotalAmount;
-          this.itemQuantity = this.sumQuantity(order.OrderItems);
+          this.itemQuantity = sumQuantity(order.OrderItems);
         }
 
         private Decimal sumQuantity(List<OrderItem> oiList){
