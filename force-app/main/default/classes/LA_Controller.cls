@@ -24,7 +24,7 @@ public without sharing class LA_Controller {
         return LA_OrderController.setOrder(request);
     }
     @RemoteAction
-    public static List<LA_OrderController.OrderInfoDTO> getOrders(){
+    public static LA_OrderController.OrderInfoDTO getOrders(){
         return LA_OrderController.getOrders();
     }
 }

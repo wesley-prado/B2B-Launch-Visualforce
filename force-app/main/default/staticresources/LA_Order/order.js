@@ -32,8 +32,8 @@ const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$time
         try {
             let {result, event} = await $scope.getOrders()
             if(event && result){
-                $scope.data.order.orderList = result;
-                getOrderAccountsSet(result)
+                $scope.data.order.orderList = result.data;
+                getOrderAccountsSet(result.data)
             }
         } catch (e) {
             console.error('error', e)
