@@ -28,8 +28,8 @@ const OrderDetailsController = ['$scope', '$http','$sce', '$route', '$location',
                 ...result.data[0]
             };
         }
-            $scope.config.loading.orderDetails = false
-            $scope.$apply()
+        $scope.$apply()
+        $scope.config.loading.orderDetails = false
     }
 
     const getOrderNumberFromPath = ()=>{
