@@ -20,7 +20,7 @@
                         <div class="order-info-order-span-container">
                             <div class="order-info-order-span-wrapper">
                                 <span>Pedido</span>
-                                <span class="order-info-number">#{{order.orderNumber}}</span>
+                                <span class="order-info-number">#{{stringToInt(order.orderNumber)}}</span>
                             </div>
                             <span class="order-price mobile">{{formatPrice(order.totalAmount)}}</span>
                         </div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="order-button-container">
                     <span class="order-product-quantity mobile"><strong>{{order.itemQuantity}}</strong> produtos</span>
-                    <a>Ver pedido</a>
+                    <a href="#/detalhes/{{order.orderNumber}}">Ver pedido</a>
                     <span class="order-price desktop">{{formatPrice(order.totalAmount)}}</span>
                 </div>
             </li>

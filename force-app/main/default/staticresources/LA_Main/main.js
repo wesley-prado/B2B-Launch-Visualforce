@@ -9,7 +9,8 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
         loading:{
             productList: false,
             setOrder: false,
-            orderList: false
+            orderList: false,
+            orderDetails: false
         }
     }
 
@@ -25,7 +26,8 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
         order:{
             orderList: [],
             accountsWithOrder: [],
-            orderFilter: null
+            orderFilter: null,
+            orderDetails: null
         }        
     }
 
@@ -107,6 +109,14 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
             $scope.data.cart.productList.push({...product})
         }
         product.qtd = 1
+    }
+    
+    $scope.stringToInt = (string)=>{
+        try {
+            return parseInt(string)
+        } catch (error) {
+            return string
+        }
     }
 
     $scope.init = ()=>{

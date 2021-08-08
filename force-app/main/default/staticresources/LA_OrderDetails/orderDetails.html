@@ -1,0 +1,49 @@
+<link href="{{CSS.orderDetails}}" rel="stylesheet"/>
+
+<div class="page-container" ng-init="init()" ng-cloak>
+    <header>
+        <h1 ng-if="config.loading.orderDetails">Carregando pedido...</h1>
+        <h1 ng-if="!config.loading.orderDetails">Pedido #{{stringToInt(data.order.orderDetails.orderNumber)}}</h1>
+        <h2 ng-if="!config.loading.orderDetails">Pedido realizado para: <strong>{{data.order.orderDetails.accountName}}</strong></h2>
+    </header>
+
+
+    <section class="page-cart-container" ng-if="!config.loading.orderDetails">
+        <div class="cart-content">
+            <table>
+                <tbody>
+                    <tr ng-repeat="product in data.order.orderDetails.productList">
+                        <td>
+                            <a href="#/produto/{{order.product.id}}">
+                                <img src="{{product.image}}"/>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/produto/{{product.id}}">
+                                <p>{{product.name}}</p>
+                                <h4>{{formatPrice(product.unitPrice)}}</h4>
+                            </a>
+
+                        </td>
+                        <td class="cart-content-quantity-price">
+                            <h3>{{formatPrice(product.unitPrice * product.qtd)}}</h3>
+                            <div class="product-quantity-container">
+                                <input type="number" ng-model="product.qtd" readonly/>
+                            </div>
+                        </td>
+                        <td class="cart-content-price">
+                            <h3>{{formatPrice(product.unitPrice * product.qtd)}}</h3>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <aside class="cart-summary" ng-if="!config.loading.orderDetails">
+            <h1>Total da compra</h1>
+            <div>
+                <h2>{{formatPrice(data.order.orderDetails.totalAmount)}}</h2>
+                <h3><strong>{{data.order.orderDetails.itemQuantity}}</strong> produtos</h3>
+            </div>
+        </aside>
+    </section>
+</div>

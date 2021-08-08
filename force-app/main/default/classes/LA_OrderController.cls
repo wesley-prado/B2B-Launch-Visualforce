@@ -80,7 +80,7 @@ public without sharing class LA_OrderController {
 
         try {
             for(Order order : [
-                SELECT Id, EffectiveDate, OrderNumber, Account.Name, TotalAmount,
+                SELECT EffectiveDate, OrderNumber, Account.Name, TotalAmount,
                 (SELECT Quantity from OrderItems)
                 FROM Order
                 WHERE TotalAmount > 0
@@ -93,6 +93,77 @@ public without sharing class LA_OrderController {
         }
 
         return result;
+    }
+
+    public static OrderDetailsDTO getOrderDetails(String orderNumber){
+        OrderDetailsDTO result = new OrderDetailsDTO();
+
+        try {
+            for(Order order : [
+                SELECT OrderNumber, Account.Name, TotalAmount,
+                (SELECT Product2Id, Product2.Name, UnitPrice, Quantity, TotalPrice FROM OrderItems)
+                FROM Order
+                WHERE OrderNumber = : orderNumber
+                AND TotalAmount > 0
+                LIMIT 1
+            ]){
+                result.data.add(new OrderDetails(order));
+            }
+        } catch (Exception ex) {
+            result = new OrderDetailsDTO(ex);
+        }
+
+        return result;
+    }
+
+    public class OrderDetailsDTO extends RemotingResult{
+        List<OrderDetails> data = new List<OrderDetails>();
+
+        public OrderDetailsDTO(){
+            super();
+        }
+        public OrderDetailsDTO(Exception ex){
+            super(ex);
+        }
+        public OrderDetailsDTO(Boolean hasError, String message){
+            super(hasError, message);
+        }
+    }
+
+    public class OrderDetails{
+        public String orderNumber;
+        public String accountName; 
+        public Decimal totalAmount;
+        Public Decimal itemQuantity = 0;
+        public List<ProductDetails> productList = new List<ProductDetails>();
+
+        public OrderDetails(Order order){
+            this.orderNumber = order.OrderNumber;
+            this.accountName = order.Account.Name;
+            this.totalAmount = order.TotalAmount;
+
+            for(OrderItem orderItem : order.OrderItems){
+                this.itemQuantity+= orderItem.Quantity;
+                productList.add(new ProductDetails(orderItem));
+            }
+        }
+    }
+
+    public class ProductDetails{
+        public String productId;
+        public String  image = 'https://img.simplustec.com.br/product_images/7891515503659/1/7891515503659_1_1_200_72_RGB.png';
+        public String  name;
+        public Decimal unitPrice;
+        public Decimal totalPrice;
+        public Decimal qtd;
+
+        public ProductDetails(OrderItem orderItem){
+            this.productId = orderItem.Product2Id;
+            this.name = orderItem.Product2.Name;
+            this.unitPrice = orderItem.UnitPrice;
+            this.totalPrice = orderItem.TotalPrice;
+            this.qtd = orderItem.Quantity;
+        }
     }
 
     public class OrderInfoDTO extends RemotingResult{
@@ -109,30 +180,23 @@ public without sharing class LA_OrderController {
         }
     }
     public class OrderInfo{
-        public String id;
         public String effectiveDate;
         public String orderNumber;
         public String accountName;
-        public Decimal itemQuantity;
+        public Decimal itemQuantity = 0;
         public Decimal totalAmount;
 
         public OrderInfo(Order order){
-          this.id = order.Id;
           this.effectiveDate = String.valueOf(order.effectiveDate);
           this.orderNumber = order.orderNumber;
           this.accountName = order.Account.Name;
           this.totalAmount = order.TotalAmount;
-          this.itemQuantity = sumQuantity(order.OrderItems);
+          
+          for(OrderItem orderItem : order.OrderItems){
+              this.itemQuantity+= orderItem.Quantity;
+          }
         }
 
-        private Decimal sumQuantity(List<OrderItem> oiList){
-            Decimal sum = 0;
-            for(OrderItem orderItem : oiList){
-                sum += orderItem.Quantity;
-            }
-
-            return sum;
-        }
     }
 
     public class OrderRequestDTO {
