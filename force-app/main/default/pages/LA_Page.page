@@ -136,13 +136,15 @@
                         home: "{!URLFOR($Resource.LA_Home, 'home.html')}",
                         cart: "{!URLFOR($Resource.LA_Cart, 'cart.html')}",
                         404: "{!URLFOR($Resource.LA_404, '404.html')}",
-                        order: "{!URLFOR($Resource.LA_Order, 'order.html')}"
+                        order: "{!URLFOR($Resource.LA_Order, 'order.html')}",
+                        orderDetails: "{!URLFOR($Resource.LA_OrderDetails, 'orderDetails.html')}"
                     },
                     CSS:{
                         home: "{!URLFOR($Resource.LA_Home, 'home.css')}",
                         cart: "{!URLFOR($Resource.LA_Cart, 'cart.css')}",
                         404: "{!URLFOR($Resource.LA_404, '404.css')}",
-                        order: "{!URLFOR($Resource.LA_Order, 'order.css')}"
+                        order: "{!URLFOR($Resource.LA_Order, 'order.css')}",
+                        orderDetails: "{!URLFOR($Resource.LA_OrderDetails, 'orderDetails.css')}"
                     },
                     TEMPLATES:{
                         404:"{!URLFOR($Resource.NExpress, 'imgs/404.svg')}"
@@ -176,6 +178,7 @@
             <apex:includeScript value="{!URLFOR($Resource.LA_Cart, 'cart.js')}"/>
             <apex:includeScript value="{!URLFOR($Resource.LA_404, '404.js')}"/>
             <apex:includeScript value="{!URLFOR($Resource.LA_Order, 'order.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.LA_OrderDetails, 'orderDetails.js')}"/>
 
             <!-- APP -->
             <apex:includeScript value="{!URLFOR($Resource.LA_App, 'app.js')}"/>

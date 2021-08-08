@@ -35,11 +35,6 @@ public without sharing class LA_ProductController {
         return result;
     }
 
-    public static ProductDTO getOrderDetails(String orderId){
-        ProductDTO result = new ProductDTO();
-
-        return result
-    }
     public class ProductDTO extends RemotingResult{
         public List<ProductInfo> data = new List<ProductInfo>();
 

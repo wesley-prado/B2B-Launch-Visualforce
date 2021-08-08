@@ -15,16 +15,24 @@ public without sharing class LA_Controller {
     public static LA_AccountController.AccountDTO getAccountList(){
         return LA_AccountController.getAccountList();
     }
+
     @RemoteAction
     public static LA_ProductController.ProductDTO getProductList(){
         return LA_ProductController.getProductList();
     }
+
     @RemoteAction
     public static RemotingResult setOrder(LA_OrderController.OrderRequestDTO request){
         return LA_OrderController.setOrder(request);
     }
+
     @RemoteAction
     public static LA_OrderController.OrderInfoDTO getOrders(){
         return LA_OrderController.getOrders();
+    }
+
+    @RemoteAction
+    public static LA_OrderController.OrderDetailsDTO getOrderDetails(String orderNumber){
+        return LA_OrderController.getOrderDetails(orderNumber);
     }
 }

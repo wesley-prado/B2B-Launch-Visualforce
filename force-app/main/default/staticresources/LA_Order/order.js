@@ -15,7 +15,7 @@ const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$time
                         event
                     })
                 })
-            } catch (e) {
+            } catch (error) {
                 console.error('error', error),
                 Swal.fire({
                     type: 'warning',
