@@ -7,7 +7,10 @@
     justify-content: space-between;
     align-items: flex-start;
 }
-
+.order-detail-header h2,
+.order-detail-header h2 strong{
+    font-size: 20px;
+}
 .cart-content{
     display: flex;
     width:900px;
@@ -123,6 +126,12 @@
     cursor: not-allowed;
     user-select: none;
 }
+.cart-summary .order-detail-summary-date{
+    color: var(--color-blue);
+    font-weight: var(--bold);
+    font-size: 20px;
+    margin-top: 40px;
+}
 
 
 /* MIN-WIDTH */
@@ -176,6 +185,9 @@
         font-size: 14px;
     }
     .cart-summary button{
+        font-size: 16px;
+    }
+    .cart-summary .order-detail-summary-date{
         font-size: 16px;
     }
 }

@@ -1,7 +1,7 @@
 <link href="{{CSS.orderDetails}}" rel="stylesheet"/>
 
 <div class="page-container" ng-init="init()" ng-cloak>
-    <header>
+    <header class="order-detail-header">
         <h1 ng-if="config.loading.orderDetails">Carregando pedido...</h1>
         <h1 ng-if="!config.loading.orderDetails">Pedido #{{stringToInt(data.order.orderDetails.orderNumber)}}</h1>
         <h2 ng-if="!config.loading.orderDetails">Pedido realizado para: <strong>{{data.order.orderDetails.accountName}}</strong></h2>
@@ -39,10 +39,11 @@
             </table>
         </div>
         <aside class="cart-summary" ng-if="!config.loading.orderDetails">
-            <h1>Total da compra</h1>
+            <h1>Total do pedido</h1>
             <div>
                 <h2>{{formatPrice(data.order.orderDetails.totalAmount)}}</h2>
-                <h3><strong>{{data.order.orderDetails.itemQuantity}}</strong> produtos</h3>
+                <h3><strong>{{data.order.orderDetails.itemQuantity}}</strong> {{data.order.orderDetails.itemQuantity == 1 ? 'produto' : 'produtos'}}</h3>
+                <h3 class="order-detail-summary-date">{{formatDate(data.order.orderDetails.effectiveDate, {day: '2-digit', month: 'long', year: 'numeric'})}}</h3>
             </div>
         </aside>
     </section>

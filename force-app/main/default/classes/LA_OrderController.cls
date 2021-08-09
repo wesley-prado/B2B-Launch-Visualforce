@@ -100,7 +100,7 @@ public without sharing class LA_OrderController {
 
         try {
             for(Order order : [
-                SELECT OrderNumber, Account.Name, TotalAmount,
+                SELECT OrderNumber, Account.Name,EffectiveDate, TotalAmount,
                 (SELECT Product2Id, Product2.Name, UnitPrice, Quantity, TotalPrice FROM OrderItems)
                 FROM Order
                 WHERE OrderNumber = : orderNumber
@@ -132,6 +132,7 @@ public without sharing class LA_OrderController {
 
     public class OrderDetails{
         public String orderNumber;
+        public String effectiveDate;
         public String accountName; 
         public Decimal totalAmount;
         Public Decimal itemQuantity = 0;
@@ -139,6 +140,7 @@ public without sharing class LA_OrderController {
 
         public OrderDetails(Order order){
             this.orderNumber = order.OrderNumber;
+            this.effectiveDate = String.valueOf(order.EffectiveDate);
             this.accountName = order.Account.Name;
             this.totalAmount = order.TotalAmount;
 

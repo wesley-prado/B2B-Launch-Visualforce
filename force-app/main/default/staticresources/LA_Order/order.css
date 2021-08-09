@@ -37,6 +37,7 @@
 
     height:140px;
     width: 100%;
+    min-width: 360px;
     background-color: var(--color-white);
     border:1px solid var(--color-grey-DDD);
     border-radius: var(--border-radius);
@@ -84,7 +85,10 @@
     display: flex;
     flex-direction: column;
 }
-
+.order-info-order-span-container .account-name{
+    max-width: 100%;
+    text-overflow: ellipsis;
+}
 .order-info span,
 .order-info .order-info-order-span-container span,
 .order-product-quantity{

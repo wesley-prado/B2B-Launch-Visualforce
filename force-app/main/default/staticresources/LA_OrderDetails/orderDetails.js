@@ -24,10 +24,29 @@ const OrderDetailsController = ['$scope', '$http','$sce', '$route', '$location',
         const {result, event} = await $scope.getOrderDetails(orderNumber);
 
         if(result && event){
-            $scope.data.order.orderDetails = {
-                ...result.data[0]
-            };
+
+            if(result.data.length > 0){
+                $scope.data.order.orderDetails = {
+                    ...result.data[0]
+                };    
+            }
+            else{
+                Swal.fire({
+                    type: 'warning',
+                    title: 'Ooops',
+                    html: `Pedido não encontrado.`
+                }).then(({value})=>{
+                    if(value) {
+                        $location.path('/')
+                        $scope.$apply()
+                        $scope.config.loading.orderDetails = false
+                    }
+                })
+
+                return
+            }
         }
+
         $scope.config.loading.orderDetails = false
         $scope.$apply()
     }
