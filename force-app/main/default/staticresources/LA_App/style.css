@@ -446,7 +446,7 @@ header .cart-container a span,
 }
 
 
-@media (max-width: 1025px){
+@media only screen and (max-width: 1024px){
     /* HEADER */
     header .header-logo a img{
         height: auto;
@@ -456,7 +456,7 @@ header .cart-container a span,
         width:40rem;
     }
 }
-@media (max-width: 769px){
+@media only screen and (max-width: 768px){
     /* HEADER */
     .header-container{
         padding: 0 1.5rem;
@@ -502,7 +502,7 @@ header .cart-container a span,
     }
 }
 
-@media (max-width: 426px){
+@media only screen and (max-width: 425px){
     /* HEADER */
  .header-container{
      flex-direction: column;

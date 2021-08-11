@@ -137,14 +137,14 @@
 }
 
 /* MAX-WIDTH */
-@media (max-width: 1025px){
+@media only screen and (max-width: 1024px){
 
 }
-@media (max-width: 769px){
+@media only screen and (max-width: 768px){
 
 }
 
-@media (max-width: 426px){
+@media only screen and (max-width: 425px){
     /* ORDER */
     .desktop{
         display: none;

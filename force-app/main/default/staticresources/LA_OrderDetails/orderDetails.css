@@ -150,7 +150,7 @@
 }
 
 /* MAX-WIDTH */
-@media (max-width: 1025px){
+@media only screen and (max-width: 1024px){
     .cart-content{
         width:700px;
         margin-right: 20px;
@@ -159,7 +159,7 @@
         width:285px;
     }
 }
-@media (max-width: 769px){
+@media only screen and (max-width: 768px){
     .cart-content{
         width:500px;
         margin-right: 15px;
@@ -192,7 +192,7 @@
     }
 }
 
-@media (max-width: 426px){
+@media only screen and (max-width: 425px){
     .page-container{
         background-color: var(--color-white);
         padding: 15px 0;
