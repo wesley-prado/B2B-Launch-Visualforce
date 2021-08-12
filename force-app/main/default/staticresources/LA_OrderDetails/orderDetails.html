@@ -2,6 +2,9 @@
 
 <div class="page-container" ng-init="init()" ng-cloak>
     <header class="order-detail-header">
+        <div class="back-link-container">
+            <a href="#/pedidos"><i class="material-icons">arrow_back</i> Voltar para meus pedidos</a>
+        </div>
         <h1 ng-if="config.loading.orderDetails">Carregando pedido...</h1>
         <h1 ng-if="!config.loading.orderDetails">Pedido #{{stringToInt(data.order.orderDetails.orderNumber)}}</h1>
         <h2 ng-if="!config.loading.orderDetails">Pedido realizado para: <strong>{{data.order.orderDetails.accountName}}</strong></h2>

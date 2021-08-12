@@ -1,6 +1,10 @@
 .page-container{
     opacity: 1;
 }
+.back-link-container{
+    display: none;
+    pointer-events: none;
+}
 
 .page-cart-container{
     display: flex;
@@ -142,6 +146,7 @@ order-detail-header{
     .cart-content-quantity-price h3{
         display:none;
     }
+
     .cart-content .product-quantity-container button,
     .cart-content .product-quantity-container input{
     width:40px;
@@ -166,6 +171,10 @@ order-detail-header{
     .cart-content{
         width:500px;
         margin-right: 15px;
+    }
+    .cart-content-quantity-price h3,
+    cart-summary div h2{
+        font-size: 20px;
     }
     .cart-content .cart-content-price{
         display: none;
@@ -196,10 +205,28 @@ order-detail-header{
 }
 
 @media only screen and (max-width: 425px){
+    .page-container .order-detail-header{
+        padding: 30px 15px;
+    }
+    .order-detail-header h2,
+    .order-detail-header h2 strong{
+    font-size: 14px;
+}
     .page-container{
         background-color: var(--color-white);
         padding: 15px 0;
         padding-bottom: 100px;
+    }
+    .back-link-container{
+        display: inline-flex;
+        pointer-events: all;
+        margin-bottom: 30px;
+    }
+    .back-link-container a,
+    .back-link-container a i{
+        font-size: 14px;
+        color: var(--color-orange);
+        text-decoration: underline;
     }
     .page-cart-container{
         flex-direction: column;
