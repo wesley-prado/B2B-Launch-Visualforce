@@ -9,11 +9,12 @@
     align-items: flex-start;
     max-height: 100%;
 }
-.page-container .order-header h2{
+
+.page-container .order-header h2,
+.page-container .order-header h2 span{
     font-size: 20px;
 }
 .page-container .order-header h2 span{
-    font-size: 20px;
     font-weight: var(--bold);
 
     display: inline-flex;
@@ -146,6 +147,13 @@
 
 @media only screen and (max-width: 425px){
     /* ORDER */
+    .page-container.order-page{
+        background-color: var(--color-white);
+    }
+    .page-container .order-header h2,
+    .page-container .order-header h2 span{
+        font-size: 14px;
+    }
     .desktop{
         display: none;
     }

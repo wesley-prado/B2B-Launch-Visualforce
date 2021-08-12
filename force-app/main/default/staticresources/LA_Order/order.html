@@ -1,8 +1,8 @@
 <link href="{{CSS.order}}" rel="stylesheet" />
 
-<div class="page-container" ng-init="init()">
+<div class="page-container order-page" ng-init="init()">
     <header class="order-header">
-        <h1>Carrinho</h1>
+        <h1>Meus pedidos</h1>
         <h2 ng-if="config.loading.orderList">Carregando pedidos...</h2>
         <h2 ng-if="!config.loading.orderList">Visualizando pedidos de: <span ng-click="setShowOrderModal()">{{data.order.orderFilter || 'Todas as
                 contas'}} <i class="material-icons">keyboard_arrow_down</i></span></h2>
@@ -20,7 +20,7 @@
                         <div class="order-info-order-span-container">
                             <div class="order-info-order-span-wrapper">
                                 <span>Pedido</span>
-                                <span class="order-info-number">#{{stringToInt(order.orderNumber)}}</span>
+                                <span class="order-info-number">#{{order.orderNumber}}</span>
                             </div>
                             <span class="order-price mobile">{{formatPrice(order.totalAmount)}}</span>
                         </div>
@@ -54,12 +54,13 @@
                             <button ng-click="setOrderFilter(null)">Selecionar</button>
                         </div>
                     </li>
-                    <li ng-repeat="accountName in data.order.accountsWithOrder">
+                    <li ng-repeat="accountObj in data.order.accountsWithOrder">
                         <div class="modal-list-item">
                             <div>
-                                <h3>{{accountName}}</h3>
+                                <h3>{{accountObj.accountName}}</h3>
+                                <h2>{{accountObj.accountPhone}}</h2>
                             </div>
-                            <button ng-click="setOrderFilter(accountName)">Selecionar</button>
+                            <button ng-click="setOrderFilter(accountObj.accountName)">Selecionar</button>
                         </div>
                     </li>
                 </ul>

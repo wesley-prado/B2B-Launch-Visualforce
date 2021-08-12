@@ -365,6 +365,7 @@ header .cart-container a span,
 }
 .page-container > header{
     background: transparent;
+    padding: 30px 0;
 }
 .page-container > header h1 {
     font-size: 30px;
