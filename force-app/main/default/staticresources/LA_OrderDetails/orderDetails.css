@@ -205,9 +205,6 @@ order-detail-header{
 }
 
 @media only screen and (max-width: 425px){
-    .page-container .order-detail-header{
-        padding: 30px 15px;
-    }
     .order-detail-header h2,
     .order-detail-header h2 strong{
     font-size: 14px;
@@ -226,6 +223,9 @@ order-detail-header{
     .back-link-container a i{
         font-size: 14px;
         color: var(--color-orange);
+        
+    }
+    .back-link-container a{
         text-decoration: underline;
     }
     .page-cart-container{

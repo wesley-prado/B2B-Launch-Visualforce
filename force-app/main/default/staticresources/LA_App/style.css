@@ -648,6 +648,9 @@ header .header-search-container form{
 .page-container{
     padding-bottom:100px;
 }
+.page-container > header{
+    padding: 30px 15px;
+}
 .page-container > header h1{
     font-size: 22px;
     text-align: center;
