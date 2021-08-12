@@ -33,7 +33,7 @@ const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$time
             let {result, event} = await $scope.getOrders()
             if(event && result){
                 $scope.data.order.orderList = result.data;
-                getOrderAccountsSet(result.data)
+                getAccountWithOrder(result.data)
             }
         } catch (e) {
             console.error('error', e)
@@ -47,12 +47,29 @@ const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$time
         $scope.$apply()
     }
 
-    function getOrderAccountsSet(result){
-        const set = new Set()
-        for(let i = 0; i < result.length; i++){
-            set.add(result[i].accountName)
+    function isAccountInserted(accountArray, accountName){
+        for(let i = 0; i < accountArray.length; i++){
+            if(accountArray[i].accountName === accountName){
+               return true
+            }
         }
-        $scope.data.order.accountsWithOrder = Array.from(set)
+        return false;
+    }
+
+    function getAccountWithOrder(result){
+        const accountArray = [];
+
+        for(let i = 0; i < result.length; i++){
+            if(isAccountInserted(accountArray, result[i].accountName)){
+                continue
+            }
+            accountArray.push({
+                accountName: result[i].accountName,
+                accountPhone: result[i].accountPhone || 'Telefone não encontrado'
+            })
+
+        }
+        $scope.data.order.accountsWithOrder = accountArray
     }
 
     $scope.setOrderFilter = (accountName)=>{
