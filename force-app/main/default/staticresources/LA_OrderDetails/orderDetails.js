@@ -31,18 +31,10 @@ const OrderDetailsController = ['$scope', '$http','$sce', '$route', '$location',
                 };    
             }
             else{
-                Swal.fire({
-                    type: 'warning',
-                    title: 'Ooops',
-                    html: `Pedido não encontrado.`
-                }).then(({value})=>{
-                    if(value) {
-                        $location.path('/')
-                        $scope.$apply()
-                        $scope.config.loading.orderDetails = false
-                    }
-                })
 
+                $location.path('/404')
+                $scope.$apply()
+                $scope.config.loading.orderDetails = false
                 return
             }
         }
