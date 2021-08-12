@@ -108,19 +108,19 @@
                     </div>
                 </a>
                 <footer class="footer-menu">
-                    <a href="#/" class="footer-menu-item {{getMenuActivated('home') ? 'active' : ''}}" ng-click="setHideModal()">
+                    <a href="#/" ng-click="executeCallbacks(setMenuActivated('home'), setHideModal())" class="footer-menu-item {{getMenuActivated('home') ? 'active' : ''}}">
                         <span>
                             <i class="material-icons">home</i>
                         </span>
                         <p>Início</p>
                     </a>
-                    <a class="footer-menu-item {{getMenuActivated('contas') ? 'active' : ''}}" ng-click="setShowModal()">
+                    <a ng-click="executeCallbacks(setMenuActivated('contas'), setShowModal())"  class="footer-menu-item {{getMenuActivated('contas') ? 'active' : ''}}">
                         <span>
                             <i class="material-icons">person</i>
                         </span>
                         <p>Contas</p>
                     </a>
-                    <a href="#/pedidos" class="footer-menu-item {{getMenuActivated('pedidos') ? 'active' : ''}}">
+                    <a ng-click="executeCallbacks(setMenuActivated('pedidos'), setHideModal())" href="#/pedidos" class="footer-menu-item {{getMenuActivated('pedidos') ? 'active' : ''}}">
                         <span>
                             <i class="material-icons">local_shipping</i>
                         </span>

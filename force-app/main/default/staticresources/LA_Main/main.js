@@ -11,7 +11,8 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
             setOrder: false,
             orderList: false,
             orderDetails: false
-        }
+        },
+        activeMenu: 'home'
     }
 
     $scope.data = {
@@ -88,9 +89,14 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
         $scope.setHideModal()
     }
 
+    $scope.executeCallbacks = (...arguments) => {
+        arguments.forEach(f => f)
+    }
+    $scope.setMenuActivated = (item) =>{
+        $scope.config.activeMenu = item
+    }
     $scope.getMenuActivated = (item)=>{
-        let itemActivated = $scope.config.show.modal ? 'contas' : 'home'
-        return item === itemActivated
+        return $scope.config.activeMenu === item
     }
 
     $scope.addProductQuantity = (product, qtd = 1)=>{
