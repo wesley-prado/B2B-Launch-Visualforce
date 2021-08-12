@@ -12,8 +12,22 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
             orderList: false,
             orderDetails: false
         },
-        activeMenu: 'home'
+        activeMenu: false
     }
+    function getInitialMenuState(){
+        let path = $location.path()
+        switch(path){
+            case '/':
+                $scope.config.activeMenu = 'home'
+                break;
+            case '/pedidos':
+                $scope.config.activeMenu = 'pedidos'
+                break;
+            default:
+                null
+        }
+    }
+
 
     $scope.data = {
         search: null,
@@ -124,6 +138,11 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
             return string
         }
     }
+
+    $scope.$on('$locationChangeSuccess', function($event, next, current) { 
+        getInitialMenuState()
+      });
+
 
     $scope.init = ()=>{
         $scope.data.accountList = accountList;
