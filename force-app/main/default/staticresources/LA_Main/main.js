@@ -12,7 +12,7 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
             orderList: false,
             orderDetails: false
         },
-        activeMenu: false
+        activeMenu: null
     }
 
     $scope.data = {
