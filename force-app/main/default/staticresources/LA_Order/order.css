@@ -98,6 +98,7 @@
 }
 .order-info span.order-info-number{
     font-size: 18px;
+    color: var(--color-batman);
     font-weight: var(--bold);
 }
 .order-button-container{
