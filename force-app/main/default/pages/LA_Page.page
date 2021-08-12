@@ -30,8 +30,7 @@
                         </div> 
                         <div class="header-search-container">
                                 <form>
-                                    <input id="header-search" ng-model="data.midSearch"/>
-                                    <label for="header-search" id="header-search-label" class="noselect">Procure os melhores produtos.</label>
+                                    <input id="header-search" placeholder="Procure os melhores produtos." ng-model="data.midSearch"/>
                                     <button type="submit" ng-click="setSearch()">
                                         <i class="material-icons">search</i>
                                     </button>
@@ -152,19 +151,6 @@
                 }
 
                 const accountList = JSON.parse('{!accountList}');
-            </script>
-            <script>
-                const $input = document.querySelector('#header-search')
-                const $label = document.querySelector('#header-search-label')
-                
-                $input.addEventListener('input',()=> {
-                    if($input.value == ''){
-                        $label.classList.remove('hide-label')
-                    }
-                    else{
-                        $label.classList.add('hide-label')
-                    }
-                })
             </script>
             <apex:includeScript value="{!URLFOR($Resource.NExpress, 'libs/Sweetalert/SweetalertJs.js')}"/>
             <apex:includeScript value="{!URLFOR($Resource.NExpress, 'libs/AngularJs/Angular.js')}"/>

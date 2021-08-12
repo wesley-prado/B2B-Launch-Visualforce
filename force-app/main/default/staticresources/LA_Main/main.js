@@ -14,20 +14,6 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
         },
         activeMenu: false
     }
-    function getInitialMenuState(){
-        let path = $location.path()
-        switch(path){
-            case '/':
-                $scope.config.activeMenu = 'home'
-                break;
-            case '/pedidos':
-                $scope.config.activeMenu = 'pedidos'
-                break;
-            default:
-                null
-        }
-    }
-
 
     $scope.data = {
         search: null,
@@ -136,6 +122,20 @@ const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
             return parseInt(string)
         } catch (error) {
             return string
+        }
+    }
+
+    function getInitialMenuState(){
+        let path = $location.path()
+        switch(path){
+            case '/':
+                $scope.config.activeMenu = 'home'
+                break;
+            case '/pedidos':
+                $scope.config.activeMenu = 'pedidos'
+                break;
+            default:
+                $scope.config.activeMenu = null
         }
     }
 

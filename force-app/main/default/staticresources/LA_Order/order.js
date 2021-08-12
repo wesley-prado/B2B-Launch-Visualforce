@@ -47,9 +47,9 @@ const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$time
         $scope.$apply()
     }
 
-    function isAccountInserted(accountArray, accountName){
+    function isAccountInserted(accountArray, accountId){
         for(let i = 0; i < accountArray.length; i++){
-            if(accountArray[i].accountName === accountName){
+            if(accountArray[i].accountId === accountId){
                return true
             }
         }
@@ -60,10 +60,11 @@ const OrderController = ['$scope', '$http','$sce', '$route', '$location', '$time
         const accountArray = [];
 
         for(let i = 0; i < result.length; i++){
-            if(isAccountInserted(accountArray, result[i].accountName)){
+            if(isAccountInserted(accountArray, result[i].accountId)){
                 continue
             }
             accountArray.push({
+                accountId: result[i].accountId,
                 accountName: result[i].accountName,
                 accountPhone: result[i].accountPhone || 'Telefone não encontrado'
             })

@@ -80,7 +80,7 @@ public without sharing class LA_OrderController {
 
         try {
             for(Order order : [
-                SELECT EffectiveDate, OrderNumber, Account.Name, TotalAmount, Account.Phone,
+                SELECT EffectiveDate, OrderNumber, AccountId, Account.Name, TotalAmount, Account.Phone,
                 (SELECT Quantity from OrderItems)
                 FROM Order
                 WHERE TotalAmount > 0
@@ -184,16 +184,18 @@ public without sharing class LA_OrderController {
     public class OrderInfo{
         public String effectiveDate;
         public String orderNumber;
-        public String accountPhone;
+        public String accountId;
         public String accountName;
+        public String accountPhone;
         public Decimal itemQuantity = 0;
         public Decimal totalAmount;
 
         public OrderInfo(Order order){
           this.effectiveDate = String.valueOf(order.effectiveDate);
           this.orderNumber = order.orderNumber;
-          this.accountPhone = order.Account.Phone;
+          this.AccountId = order.AccountId;
           this.accountName = order.Account.Name;
+          this.accountPhone = order.Account.Phone;
           this.totalAmount = order.TotalAmount;
           
           for(OrderItem orderItem : order.OrderItems){
