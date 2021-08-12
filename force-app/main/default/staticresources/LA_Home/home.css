@@ -1,6 +1,7 @@
 .page-container{
     opacity: 1;
 }
+
 .page-container > header h1{
     display: flex;
     align-items: center;
