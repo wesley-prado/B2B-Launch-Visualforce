@@ -148,6 +148,7 @@
 @media only screen and (max-width: 425px){
     /* ORDER */
     .page-container.order-page{
+        min-height: calc(100vh - 100px);
         background-color: var(--color-white);
     }
     .page-container .order-header h2,
