@@ -78,6 +78,9 @@
     padding: 30px 15px;
     background-color: var(--color-white);
 }
+.cart-summary.minimum-order-wrapper{
+    margin-top: 15px;
+}
 .cart-summary h1{
     color: var(--color-blue);
     font-size: 24px;
@@ -124,7 +127,41 @@
     user-select: none;
 }
 
-
+.cart-summary.minimum-order-wrapper label{
+    font-size: 18px;
+    color: var(--color-blue);
+    font-weight: var(--semi-bold);
+    margin-bottom: 5px;
+}
+.cart-summary.minimum-order-wrapper #progress-bar{
+    width: 100%;
+    height:12px;
+    background-color: var(--color-greyish-white);
+    border-radius: var(--border-radius);
+}
+.cart-summary.minimum-order-wrapper #progress-value{
+    height: 100%;
+    background-color: var(--color-blue);
+    border-radius: var(--border-radius);
+}
+.cart-summary.minimum-order-wrapper #progress-value.progress-completed{
+    background-color: var(--color-green);
+}
+.cart-summary.minimum-order-wrapper p{
+    font-size: 16px;
+    color: var(--color-grey-999);
+    margin-top: 5px;
+    text-align: center;
+}
+.cart-summary.minimum-order-wrapper p span{
+    font-size: 16px;
+    color: var(--color-green);
+    font-weight: var(--semi-bold);
+}
+.hide-element{
+    background-color: transparent;
+    pointer-events: none;
+}
 /* MIN-WIDTH */
 @media (min-width: 769px){
     .cart-content-quantity-price h3{

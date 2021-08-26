@@ -1,4 +1,4 @@
-<link href="{{CSS.cart}}" rel="stylesheet"/>
+<link href="{{CSS.cart}}" rel="stylesheet" />
 
 <div class="page-container" ng-init="init()">
     <header>
@@ -13,7 +13,7 @@
                     <tr ng-repeat="product in data.cart.productList">
                         <td>
                             <a href="#/produto/{{product.id}}">
-                                <img src="{{product.image}}"/>
+                                <img src="{{product.image}}" />
                             </a>
                         </td>
                         <td>
@@ -29,10 +29,11 @@
                                 <button ng-click="removeProductQuantity(product)" ng-if="product.qtd > 1">
                                     <i class="material-icons">remove</i>
                                 </button>
-                                <button ng-click="deleteFromCart(product)" ng-if="product.qtd <= 1" class="product-quantity-delete">
+                                <button ng-click="deleteFromCart(product)" ng-if="product.qtd <= 1"
+                                    class="product-quantity-delete">
                                     <i class="material-icons">delete</i>
                                 </button>
-                                <input type="number" ng-model="product.qtd" readonly/>
+                                <input type="number" ng-model="product.qtd" readonly />
                                 <button ng-click="addProductQuantity(product)">
                                     <i class="material-icons">add</i>
                                 </button>
@@ -45,22 +46,35 @@
                 </tbody>
             </table>
         </div>
-        <aside class="cart-summary">
-            <h1>Total da compra</h1>
-            <div>
-                <h2>{{formatPrice(getCartPrice())}}</h2>
-                <h3><strong>{{getCartQuantity()}}</strong> produtos</h3>
+        <aside>
+            <div class="cart-summary">
+                <h1>Total da compra</h1>
+                <div>
+                    <h2>{{formatPrice(getCartPrice())}}</h2>
+                    <h3><strong>{{getCartQuantity()}}</strong> produtos</h3>
+                </div>
+                <button ng-click="handle_setOrder()"
+                    ng-disabled="getCartQuantity() < 1 || config.loading.setOrder || getProgressBarPercentage() < 100">{{config.loading.setOrder ? 'Enviando
+                    pedido...' : 'Comprar'}}</button>
             </div>
-            <button ng-click="handle_setOrder()" ng-disabled="getCartQuantity() < 1 || config.loading.setOrder">{{config.loading.setOrder ? 'Enviando pedido...' : 'Comprar'}}</button>
+            <div class="cart-summary minimum-order-wrapper">
+                <label for="progress-bar">Pedido mínimo</label>
+                <div id="progress-bar">
+                    <div id="progress-value" class="{{getProgressBarPercentage() >= 100 ? 'progress-completed' : ''}}" style="width: {{getProgressBarPercentage()}}%"></div>
+                </div>
+                <p ng-if="getRemainingToAchieveMinimum() > 0">Faltam <span>{{formatPrice(getRemainingToAchieveMinimum())}}</span> para o pedido mínimo</p>
+                <p ng-if="getRemainingToAchieveMinimum() <= 0">Pedido mínimo atingido</p>
+            </div>
         </aside>
     </section>
     <!-- Mobile -->
-    <a ng-click="handle_setOrder()" href="#/carrinho" class="footer-cart cart-confirm-button {{config.loading.setOrder && 'disabled'}}" ng-if="getCartQuantity() > 0" >
+    <a ng-click="handle_setOrder()" href="#/carrinho"
+        class="footer-cart cart-confirm-button {{config.loading.setOrder && 'disabled'}} {{getProgressBarPercentage() < 100 ? 'hide-element' : ''}}" ng-if="getCartQuantity() > 0">
         <div class="footer-cart-item">
             <span class="cart-icon">
                 <i class="material-icons">shopping_cart</i>
                 <span>{{getCartQuantity()}}</span>
-            </span> 
+            </span>
         </div>
         <div class="footer-cart-item footer-cart-item-text">
             <p>{{config.loading.setOrder ? 'Enviando...' : 'Comprar'}}</p>
@@ -69,4 +83,5 @@
             <p>{{formatPrice(getCartPrice())}}</p>
         </div>
     </a>
+
 </div>

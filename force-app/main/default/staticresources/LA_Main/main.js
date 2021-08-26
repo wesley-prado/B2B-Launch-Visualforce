@@ -1,6 +1,7 @@
 const MainController = ['$scope', '$http','$sce', '$route', '$location', '$timeout', '$routeParams', ($scope, $http, $sce, $route, $location, $timeout, $routeParams)=>{
     $scope.TEMPLATES = window.resource.TEMPLATES
     $scope.CSS = window.resource.CSS
+    $scope.SETTINGS = window.resource.SETTINGS
     
     $scope.config = {
         show:{

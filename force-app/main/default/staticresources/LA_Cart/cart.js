@@ -99,6 +99,15 @@ const CartController = ['$scope', '$http','$sce', '$route', '$location', '$timeo
         $scope.$apply()
     };
 
+    $scope.getRemainingToAchieveMinimum = ()=>{
+
+        return $scope.SETTINGS.defaultMinimumOrderValue - $scope.getCartPrice()
+    }
+    $scope.getProgressBarPercentage = ()=>{
+        const percentage = ($scope.getCartPrice() / $scope.SETTINGS.defaultMinimumOrderValue) * 100;
+        return percentage < 100 ? percentage : 100;
+    }
+
     $scope.init = ()=>{
         // scope.handle_getProductList();
     }

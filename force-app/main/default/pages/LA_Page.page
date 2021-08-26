@@ -147,6 +147,10 @@
                     },
                     TEMPLATES:{
                         404:"{!URLFOR($Resource.NExpress, 'imgs/brf-logo.svg')}"
+                    },
+                    SETTINGS:{
+                        defaultMinimumOrderValue:"{!$Setup.PortalConfig__c.DefaultMinimumOrderValue__c}",
+                        pricebook:"{!$Setup.PortalConfig__c.Pricebook__c}",
                     }
                 }
 
